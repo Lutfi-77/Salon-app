@@ -25,40 +25,40 @@
             WE ARE COMMITED TO BRINGING THE BEST PRODUCT SERVICE AND ADVICE TO OUR CUSTOMERS.
         </p>
 
-        <div class="grid grid-cols-3 justify-center gap-2">
+        <div class="grid grid-cols-2 md:grid-cols-2 justify-center gap-2">
             <div class="card w-full rounded-lg overflow-hidden relative">
                 <img src="{{asset('assets/img/haircut.jpg')}}" class="w-full" alt="Haircut">
-                <div class="absolute top-1 left-1 bg-white px-5 py-1 font-bold rounded-lg">
+                <div class="absolute top-1 left-1 bg-white px-5 py-1 font-semibold rounded-lg">
                     Haircut
                 </div>
             </div>
             <div class="card w-full rounded-lg overflow-hidden relative">
                 <img src="{{asset('assets/img/haircut.jpg')}}" class="w-full" alt="Haircut">
-                <div class="absolute top-1 left-1 bg-white px-5 py-1 font-bold rounded-lg">
+                <div class="absolute top-1 left-1 bg-white px-5 py-1 font-semibold rounded-lg">
                     Haircut
                 </div>
             </div>
             <div class="card w-full rounded-lg overflow-hidden relative">
                 <img src="{{asset('assets/img/haircut.jpg')}}" class="w-full" alt="Haircut">
-                <div class="absolute top-1 left-1 bg-white px-5 py-1 font-bold rounded-lg">
+                <div class="absolute top-1 left-1 bg-white px-5 py-1 font-semibold rounded-lg">
                     Haircut
                 </div>
             </div>
             <div class="card w-full rounded-lg overflow-hidden relative">
                 <img src="{{asset('assets/img/haircut.jpg')}}" class="w-full" alt="Haircut">
-                <div class="absolute top-1 left-1 bg-white px-5 py-1 font-bold rounded-lg">
+                <div class="absolute top-1 left-1 bg-white px-5 py-1 font-semibold rounded-lg">
                     Haircut
                 </div>
             </div>
             <div class="card w-full rounded-lg overflow-hidden relative">
                 <img src="{{asset('assets/img/haircut.jpg')}}" class="w-full" alt="Haircut">
-                <div class="absolute top-1 left-1 bg-white px-5 py-1 font-bold rounded-lg">
+                <div class="absolute top-1 left-1 bg-white px-5 py-1 font-semibold rounded-lg">
                     Haircut
                 </div>
             </div>
             <div class="card w-full rounded-lg overflow-hidden relative">
                 <img src="{{asset('assets/img/haircut.jpg')}}" class="w-full" alt="Haircut">
-                <div class="absolute top-1 left-1 bg-white px-5 py-1 font-bold rounded-lg">
+                <div class="absolute top-1 left-1 bg-white px-5 py-1 font-semibold rounded-lg">
                     Haircut
                 </div>
             </div>
@@ -67,53 +67,53 @@
 </section>
 
 {{-- Pricelist section --}}
-<section class="bg-[#2A2A2A]" id="pice-list">
+<section class="bg-[#2A2A2A] py-10" id="pice-list">
     <div class="container">
-        <h2 class="font-bold text-center text-4xl pt-10 pb-3 text-white mb-5">Price List</h2>
+        <h2 class="font-bold text-center text-4xl pb-3 text-white mb-5">Price List</h2>
         <div class="grid grid-cols-2 gap-3 text-white">
             <div class="relative mb-2">
                 <div class="after:content-[''] after:block after:w-full after:h-1 after:bg-white after:mt-2 after:mb-3">
                     <div class="flex justify-between">
-                        <div class="title text-2xl">Haircut</div>
-                        <div class="price text-2xl">120-150k</div>
+                        <div class="title text-base md:text-2xl">Haircut</div>
+                        <div class="price text-base md:text-2xl">120-150k</div>
                     </div>
                 </div>
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Explicabo aspernatur fugiat temporibus aliquid
-                culpa, reiciendis autem blanditiis illo accusantium perferendis odit animi sed, est facilis. Asperiores
-                voluptatibus nostrum labore nulla.
+                <div class="text-base">
+                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Amet deserunt eum, recusandae a architecto, rerum ad excepturi placeat iusto maiores voluptas saepe consequatur, magni ullam. Accusantium harum vitae alias repellendus?
+                </div>
             </div>
             <div class="relative mb-2">
                 <div class="after:content-[''] after:block after:w-full after:h-1 after:bg-white after:mt-2 after:mb-3">
                     <div class="flex justify-between">
-                        <div class="title text-2xl">Haircut</div>
-                        <div class="price text-2xl">120-150k</div>
+                        <div class="title text-base md:text-2xl">Haircut</div>
+                        <div class="price text-base md:text-2xl">120-150k</div>
                     </div>
                 </div>
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Explicabo aspernatur fugiat temporibus aliquid
-                culpa, reiciendis autem blanditiis illo accusantium perferendis odit animi sed, est facilis. Asperiores
-                voluptatibus nostrum labore nulla.
+                <div class="text-base">
+                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Amet deserunt eum, recusandae a architecto, rerum ad excepturi placeat iusto maiores voluptas saepe consequatur, magni ullam. Accusantium harum vitae alias repellendus?
+                </div>
             </div>
             <div class="relative mb-2">
                 <div class="after:content-[''] after:block after:w-full after:h-1 after:bg-white after:mt-2 after:mb-3">
                     <div class="flex justify-between">
-                        <div class="title text-2xl">Haircut</div>
-                        <div class="price text-2xl">120-150k</div>
+                        <div class="title text-base md:text-2xl">Haircut</div>
+                        <div class="price text-base md:text-2xl">120-150k</div>
                     </div>
                 </div>
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Explicabo aspernatur fugiat temporibus aliquid
-                culpa, reiciendis autem blanditiis illo accusantium perferendis odit animi sed, est facilis. Asperiores
-                voluptatibus nostrum labore nulla.
+                <div class="text-base">
+                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Amet deserunt eum, recusandae a architecto, rerum ad excepturi placeat iusto maiores voluptas saepe consequatur, magni ullam. Accusantium harum vitae alias repellendus?
+                </div>
             </div>
             <div class="relative mb-2">
                 <div class="after:content-[''] after:block after:w-full after:h-1 after:bg-white after:mt-2 after:mb-3">
                     <div class="flex justify-between">
-                        <div class="title text-2xl">Haircut</div>
-                        <div class="price text-2xl">120-150k</div>
+                        <div class="title text-base md:text-2xl">Haircut</div>
+                        <div class="price text-base md:text-2xl">120-150k</div>
                     </div>
                 </div>
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Explicabo aspernatur fugiat temporibus aliquid
-                culpa, reiciendis autem blanditiis illo accusantium perferendis odit animi sed, est facilis. Asperiores
-                voluptatibus nostrum labore nulla.
+                <div class="text-base">
+                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Amet deserunt eum, recusandae a architecto, rerum ad excepturi placeat iusto maiores voluptas saepe consequatur, magni ullam. Accusantium harum vitae alias repellendus?
+                </div>
             </div>
         </div>
     </div>
