@@ -11,17 +11,17 @@
 </head>
 
 <body>
-    <nav class="w-full bg-[rgb(0,0,0)]/[.1] fixed top-0 w-full shadow-lg">
+    <nav id="navbar" class="w-full bg-darkTransparent fixed top-0 w-full shadow-md z-10">
         <div class="container mx-auto">
             <div class="flex justify-between text-white items-center">
-                <div class="py-3">Logo</div>
-                <div class="py-3 hidden md:block">
+                <div class="py-5">Logo</div>
+                <div class="py-5 hidden md:block">
                     <a href="">Home</a>
                     <a href="">Home</a>
                     <a href="">Home</a>
                     <a href="">Home</a>
                 </div>
-                <div class="py-3">
+                <div class="py-5">
                     <div class="hidden md:block">
                         Login
                     </div>
@@ -42,7 +42,7 @@
     </nav>
     @yield('content')
 
-    <footer class="bg-[#2A2A2A] mt-5 text-white p-5">
+    <footer class="bg-secondary mt-5 text-white p-5">
         <div class="container mx-auto">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
                 <iframe
@@ -80,9 +80,21 @@
     <script>
         const button = document.querySelector('#hamburger');
         const mobileNav = document.querySelector('#mobile-nav');
+        const navbar = document.querySelector('#navbar');
         button.addEventListener('click', function () {
+            console.log(1)
             button.classList.toggle('change')
             mobileNav.classList.toggle('hidden')
+        })
+
+        window.addEventListener('scroll', function () {
+            if(window.scrollY >= 200){
+                navbar.classList.add('bg-secondary');
+                navbar.classList.remove('bg-darkTransparent');
+            }else{
+                navbar.classList.remove('bg-secondary');
+                navbar.classList.add('bg-darkTransparent');
+            }
         })
 
     </script>

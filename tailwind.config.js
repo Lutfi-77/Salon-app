@@ -16,7 +16,13 @@ export default {
                 "2xl": "6rem",
             },
         },
-        extend: {},
+        extend: {
+            colors: {
+                darkTransparent: "rgba(0,0,0,0.05)",
+                primary: "#9F2B2B",
+                secondary: "#2A2A2A",
+            },
+        },
     },
     plugins: [],
 };
