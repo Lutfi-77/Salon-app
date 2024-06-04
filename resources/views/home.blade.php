@@ -153,7 +153,7 @@
     </div> --}}
     <div class="container mx-auto">
 
-        <div class="grid grid-cols-6">
+        <div class="grid grid-cols-6 items-center">
             <div class="w-full col-span-2">
                 <h2 class="font-bold text-4xl pt-10 pb-5">Our Worker</h2>
                 <p class="pb-5">
@@ -168,7 +168,7 @@
                             <i class="fa-solid fa-arrow-left text-2xl cursor-pointer text-primary prev"></i>
                             <i class="fa-solid fa-arrow-right text-2xl cursor-pointer text-primary next"></i>
                         </div>
-                        <div class="swiper-wrapper">
+                        <div class="swiper-wrapper p-3">
                             <!-- Slides -->
                             <div class="swiper-slide max-w-fit">
                                 <div
