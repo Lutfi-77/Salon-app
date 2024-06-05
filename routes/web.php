@@ -12,3 +12,4 @@ Route::get('/gallery', [GalleryController::class, 'index'])->name('gallery');
 
 Route::get('/login', [AuthUserController::class, 'login'])->name('user.login');
 Route::get('/register', [AuthUserController::class, 'register'])->name('user.register');
+Route::post('/register', [AuthUserController::class, 'storeRegister'])->name('user.registerStore');

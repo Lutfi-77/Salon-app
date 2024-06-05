@@ -17,4 +17,9 @@ class AuthUserController extends Controller
         return view('register');
     }
 
+    public function storeRegister(Request $request)
+    {
+        dd($request->all());
+    }
+
 }

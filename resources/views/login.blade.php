@@ -43,9 +43,9 @@
 
                             <label class="mb-2 block">Password</label>
                             <input type="password" id="password"
-                                class="appearance-none border-2 border-gray-200 rounded-xl w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-primary mb-5"
+                                class="appearance-none border-2 border-gray-200 rounded-xl w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-primary mb-3"
                                 required />
-                            <div class="flex items-center">
+                            <div class="flex items-center justify-end">
                                 <input type="checkbox" id="showPass"
                                     class="w-4 h-4 mr-2 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                                 <label for="showPass">
@@ -53,7 +53,7 @@
                                 </label>
                             </div>
 
-                            <button class="w-1/3 block ml-auto bg-primary py-2 text-white rounded-lg">Login</button>
+                            <button class="w-1/3 block ml-auto bg-primary py-2 text-white rounded-lg mt-3">Login</button>
                         </form>
                     </div>
                     <div
