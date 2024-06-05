@@ -36,7 +36,7 @@
             WE ARE COMMITED TO BRINGING THE BEST PRODUCT SERVICE AND ADVICE TO OUR CUSTOMERS.
         </p>
 
-        <div class="grid grid-cols-2 md:grid-cols-2 justify-center gap-2">
+        <div class="grid grid-cols-2 md:grid-cols-3 justify-center gap-2">
             <div class="card w-full rounded-lg overflow-hidden relative">
                 <img src="{{asset('assets/img/haircut.jpg')}}" class="w-full" alt="Haircut">
                 <div class="absolute top-1 left-1 bg-white px-5 py-1 font-semibold rounded-lg">
@@ -153,7 +153,7 @@
     </div> --}}
     <div class="container mx-auto">
 
-        <div class="grid grid-cols-6 items-center">
+        <div class="grid md:grid-cols-6 grid-cols-1 items-center">
             <div class="w-full col-span-2">
                 <h2 class="font-bold text-4xl pt-10 pb-5">Our Worker</h2>
                 <p class="pb-5">
@@ -173,7 +173,7 @@
                             <div class="swiper-slide max-w-fit">
                                 <div
                                     class="card max-w-fit shadow-lg rounded-md overflow-hidden">
-                                    <div class="card-image w-64 h-64">
+                                    <div class="card-image w-32 h-32 md:w-64 md:h-64">
                                         <img src="https://www.infinumgrowth.com/wp-content/uploads/2022/06/Smile-1-scaled.jpg"  class="w-full h-full" alt="worker">
                                     </div>
                                     <h3 class="text-black font-semibold p-3 text-center">Dawan Lutfi</h3>
@@ -182,7 +182,7 @@
                             <div class="swiper-slide max-w-fit">
                                 <div
                                     class="card max-w-fit shadow-lg rounded-md overflow-hidden">
-                                    <div class="card-image w-64 h-64">
+                                    <div class="card-image w-32 h-32 md:w-64 md:h-64">
                                         <img src="https://www.infinumgrowth.com/wp-content/uploads/2022/06/Smile-1-scaled.jpg"  class="w-full h-full" alt="worker">
                                     </div>
                                     <h3 class="text-black font-semibold p-3 text-center">Dawan Lutfi</h3>
@@ -191,7 +191,7 @@
                             <div class="swiper-slide max-w-fit">
                                 <div
                                     class="card max-w-fit shadow-lg rounded-md overflow-hidden">
-                                    <div class="card-image w-64 h-64">
+                                    <div class="card-image w-32 h-32 md:w-64 md:h-64">
                                         <img src="https://www.infinumgrowth.com/wp-content/uploads/2022/06/Smile-1-scaled.jpg"  class="w-full h-full" alt="worker">
                                     </div>
                                     <h3 class="text-black font-semibold p-3 text-center">Dawan Lutfi</h3>
@@ -200,7 +200,7 @@
                             <div class="swiper-slide max-w-fit">
                                 <div
                                     class="card max-w-fit shadow-lg rounded-md overflow-hidden">
-                                    <div class="card-image w-64 h-64">
+                                    <div class="card-image w-32 h-32 md:w-64 md:h-64">
                                         <img src="https://www.infinumgrowth.com/wp-content/uploads/2022/06/Smile-1-scaled.jpg"  class="w-full h-full" alt="worker">
                                     </div>
                                     <h3 class="text-black font-semibold p-3 text-center">Dawan Lutfi</h3>

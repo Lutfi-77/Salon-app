@@ -11,35 +11,7 @@
 </head>
 
 <body>
-    <nav id="navbar" class="w-full bg-darkTransparent fixed top-0 w-full shadow-md z-10">
-        <div class="container mx-auto">
-            <div class="flex justify-between text-white items-center">
-                <div class="py-5">Logo</div>
-                <div class="py-5 hidden md:block">
-                    <a href="">Home</a>
-                    <a href="">Home</a>
-                    <a href="">Home</a>
-                    <a href="">Home</a>
-                </div>
-                <div class="py-5">
-                    <div class="hidden md:block">
-                        Login
-                    </div>
-                    <div class="block md:hidden" id="hamburger">
-                        <div class="bar1"></div>
-                        <div class="bar2"></div>
-                        <div class="bar3"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div id="mobile-nav" class="bg-red-900 hidden text-white w-full text-center flex flex-col md:hidden">
-            <a href="" class="p-3">Home</a>
-            <a href="" class="p-3">Home</a>
-            <a href="" class="p-3">Home</a>
-            <a href="" class="p-3">Home</a>
-        </div>
-    </nav>
+    @include('template.nav')
     @yield('content')
 
     <footer class="bg-secondary mt-5 text-white p-5">

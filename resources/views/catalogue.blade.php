@@ -3,11 +3,11 @@
 @section('title', 'BestCut Salon')
 
 @section('content')
-<div style="background-image: url('{{asset('assets/img/hero2.jpg')}}');" class="w-full h-[70vh] bg-center bg-no-repeat bg-cover"></div>
+<div style="background-image: url('{{asset('assets/img/hero2.jpg')}}');" class="w-full h-[70vh] bg-center bg-no-repeat bg-cover before:content-[''] before:block before:w-full before:h-full before:bg-cover"></div>
 
 <section id="categories" class="mt-10">
     <div class="container mx-auto">
-        <div class="flex items-center justify-between w-1/2 mx-auto gap-5">
+        <div class="flex items-center justify-between w-full md:w-1/2 mx-auto gap-5">
             <i class="fa-solid fa-arrow-left text-2xl cursor-pointer text-primary leftArrow !hidden"></i>
             <div class="flex gap-5 overflow-x-auto [&::-webkit-scrollbar]:hidden snap-x scrollbar scroll-smooth">
                 <div class="py-1 px-5 rounded-lg border cursor-pointer snap-center shadow-md">Test</div>
@@ -22,6 +22,40 @@
                 <div class="py-1 px-5 rounded-lg border cursor-pointer snap-center shadow-md">Test</div>
             </div>
             <i class="fa-solid fa-arrow-right text-2xl cursor-pointer text-primary rightArrow"></i>
+        </div>
+
+
+        <div class="grid grid-cols-2 md:grid-cols-4 mt-10 gap-5">
+            <div class="relative rounded-lg overflow-hidden">
+                <img src="{{asset('assets/img/wolfcut.png')}}" class="w-full" alt="catalogue">
+                <div class="absolute top-1 left-1 bg-white px-5 py-1 font-semibold rounded-lg">
+                    Haircut
+                </div>
+            </div>
+            <div class="relative rounded-lg overflow-hidden">
+                <img src="{{asset('assets/img/wolfcut.png')}}" class="w-full" alt="catalogue">
+                <div class="absolute top-1 left-1 bg-white px-5 py-1 font-semibold rounded-lg">
+                    Haircut
+                </div>
+            </div>
+            <div class="relative rounded-lg overflow-hidden">
+                <img src="{{asset('assets/img/wolfcut.png')}}" class="w-full" alt="catalogue">
+                <div class="absolute top-1 left-1 bg-white px-5 py-1 font-semibold rounded-lg">
+                    Haircut
+                </div>
+            </div>
+            <div class="relative rounded-lg overflow-hidden">
+                <img src="{{asset('assets/img/wolfcut.png')}}" class="w-full" alt="catalogue">
+                <div class="absolute top-1 left-1 bg-white px-5 py-1 font-semibold rounded-lg">
+                    Haircut
+                </div>
+            </div>
+            <div class="relative rounded-lg overflow-hidden">
+                <img src="{{asset('assets/img/wolfcut.png')}}" class="w-full" alt="catalogue">
+                <div class="absolute top-1 left-1 bg-white px-5 py-1 font-semibold rounded-lg">
+                    Haircut
+                </div>
+            </div>
         </div>
     </div>
 </section>

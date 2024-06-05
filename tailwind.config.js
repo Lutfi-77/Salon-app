@@ -18,6 +18,7 @@ export default {
         },
         extend: {
             colors: {
+                cover: "rgba(0,0,0,0.2)",
                 darkTransparent: "rgba(0,0,0,0.05)",
                 primary: "#9F2B2B",
                 secondary: "#2A2A2A",
