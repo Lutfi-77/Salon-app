@@ -1,8 +1,8 @@
 @php
     $groupLink = [
-        ['url' => '/', 'title' => 'Home'],
-        ['url' => '/catalogue', 'title' => 'Catalogue'],
-        ['url' => '/gallery', 'title' => 'Gallery'],
+        ['url' => route('home'), 'title' => 'Home'],
+        ['url' => route('catalogue'), 'title' => 'Catalogue'],
+        ['url' => route('gallery'), 'title' => 'Gallery'],
     ]
 @endphp
 
@@ -16,9 +16,9 @@
                 @endforeach
             </div>
             <div class="py-5">
-                <div class="hidden md:block">
+                <a href="{{route('user.login')}}" class="hidden md:block">
                     Login
-                </div>
+                </a>
                 <div class="block md:hidden" id="hamburger">
                     <div class="bar1"></div>
                     <div class="bar2"></div>

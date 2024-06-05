@@ -27,6 +27,7 @@
 </head>
 
 <body>
+    @include('sweetalert::alert')
     <div class="w-full h-full flex justify-center items-center">
         <div class="container mx-auto">
             <div class="shadow-lg rounded-lg overflow-hidden">
@@ -60,8 +61,7 @@
                         class="register p-5 text-center bg-primary text-white flex flex-col gap-5 items-center justify-center">
                         <h1 class="text-2xl">Welcome to Charisma Salon</h1>
                         <p>Don't have account?</p>
-                        <a href="{{route('user.register')}}"
-                            class="bg-transparent border border-white py-2 px-5 rounded-full">Sign Up</a>
+                        <a href="{{route('user.register')}}" class="bg-transparent border border-white py-2 px-5 rounded-full hover:bg-white hover:text-black">Sign Up</a>
                     </div>
                 </div>
             </div>

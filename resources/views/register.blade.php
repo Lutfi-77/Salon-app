@@ -27,19 +27,26 @@
 </head>
 
 <body>
+    @include('sweetalert::alert')
     <div class="w-full h-full flex justify-center items-center">
         <div class="max-w-lg">
             <div class="container mx-auto">
                 <div class="shadow-lg rounded-lg overflow-hidden">
                     <div class="signform p-5">
                         <h2 class="text-2xl mb-5">Sign Up</h2>
-
+                        @if ($errors->any())
+                            <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+                                @foreach ($errors->all() as $error)
+                                <span class="font-medium">{{ $error }}</span>
+                                @endforeach
+                            </div>
+                        @endif
                         <form action="{{route('user.registerStore')}}" method="POST">
                             @csrf
                             <div class="flex gap-2">
                                 <div class="form-group">
-                                    <label class="mb-2 block">Username</label>
-                                    <input type="text" name="username"
+                                    <label class="mb-2 block">Name</label>
+                                    <input type="text" name="name"
                                         class="appearance-none border-2 border-gray-200 rounded-xl w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-primary mb-5"
                                         required />
                                 </div>
@@ -58,7 +65,7 @@
                                 required />
 
                             <label class="mb-2 block">Confirm Password</label>
-                            <input type="password" id="cpassword" name="confirm_password"
+                            <input type="password" id="cpassword" name="password_confirmation"
                                 class="appearance-none border-2 border-gray-200 rounded-xl w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-primary mb-3"
                                 required />
 
