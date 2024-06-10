@@ -1,6 +1,6 @@
-@extends('users.template.app')
+@extends('admin.template.app')
 
-@section('title', 'Dashboard')
+@section('title', 'Admin Dashboard')
 
 @section('content')
 <div class="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-4 2xl:gap-7.5">
@@ -155,136 +155,54 @@
     <!-- Card Item End -->
 </div>
 
-{{-- <div class="mt-4 grid grid-cols-12 gap-4 md:mt-6 md:gap-6 2xl:mt-7.5 2xl:gap-7.5">
-
-    <!-- ====== Chat Card Start -->
-    <div
-        class="col-span-12 rounded-sm border border-stroke bg-white py-6 shadow-default dark:border-strokedark dark:bg-boxdark xl:col-span-4">
-        <h4 class="mb-6 px-7.5 text-xl font-bold text-black dark:text-white">
-            Chats
-        </h4>
-
-        <div>
-            <a href="messages.html" class="flex items-center gap-5 px-7.5 py-3 hover:bg-gray-3 dark:hover:bg-meta-4">
-                <div class="relative h-14 w-14 rounded-full">
-                    <img src="{{asset('assets/img/dashboard/images/user/user-03.png')}}" alt="User" />
-                    <span
-                        class="absolute bottom-0 right-0 h-3.5 w-3.5 rounded-full border-2 border-white bg-meta-3"></span>
-                </div>
-
-                <div class="flex flex-1 items-center justify-between">
-                    <div>
-                        <h5 class="font-medium text-black dark:text-white">
-                            Devid Heilo
-                        </h5>
-                        <p>
-                            <span class="text-sm font-medium text-black dark:text-white">Hello, how are you?</span>
-                            <span class="text-xs"> . 12 min</span>
-                        </p>
-                    </div>
-                    <div class="flex h-6 w-6 items-center justify-center rounded-full bg-primary">
-                        <span class="text-sm font-medium text-white">3</span>
-                    </div>
-                </div>
-            </a>
-            <a href="messages.html" class="flex items-center gap-5 px-7.5 py-3 hover:bg-gray-3 dark:hover:bg-meta-4">
-                <div class="relative h-14 w-14 rounded-full">
-                    <img src="{{asset('assets/img/dashboard/images/user/user-04.png')}}" alt="User" />
-                    <span
-                        class="absolute bottom-0 right-0 h-3.5 w-3.5 rounded-full border-2 border-white bg-meta-3"></span>
-                </div>
-
-                <div class="flex flex-1 items-center justify-between">
-                    <div>
-                        <h5 class="font-medium">Henry Fisher</h5>
-                        <p>
-                            <span class="text-sm font-medium">I am waiting for you</span>
-                            <span class="text-xs"> . 5:54 PM</span>
-                        </p>
-                    </div>
-                </div>
-            </a>
-            <a href="messages.html" class="flex items-center gap-5 px-7.5 py-3 hover:bg-gray-3 dark:hover:bg-meta-4">
-                <div class="relative h-14 w-14 rounded-full">
-                    <img src="{{asset('assets/img/dashboard/images/user/user-05.png')}}" alt="User" />
-                    <span
-                        class="absolute bottom-0 right-0 h-3.5 w-3.5 rounded-full border-2 border-white bg-meta-6"></span>
-                </div>
-
-                <div class="flex flex-1 items-center justify-between">
-                    <div>
-                        <h5 class="font-medium">Wilium Smith</h5>
-                        <p>
-                            <span class="text-sm font-medium">Where are you now?</span>
-                            <span class="text-xs"> . 10:12 PM</span>
-                        </p>
-                    </div>
-                </div>
-            </a>
-            <a href="messages.html" class="flex items-center gap-5 px-7.5 py-3 hover:bg-gray-3 dark:hover:bg-meta-4">
-                <div class="relative h-14 w-14 rounded-full">
-                    <img src="{{asset('assets/img/dashboard/images/user/user-01.png')}}" alt="User" />
-                    <span
-                        class="absolute bottom-0 right-0 h-3.5 w-3.5 rounded-full border-2 border-white bg-meta-3"></span>
-                </div>
-
-                <div class="flex flex-1 items-center justify-between">
-                    <div>
-                        <h5 class="font-medium text-black dark:text-white">
-                            Henry Deco
-                        </h5>
-                        <p>
-                            <span class="text-sm font-medium text-black dark:text-white">Thank you so much!</span>
-                            <span class="text-xs"> . Sun</span>
-                        </p>
-                    </div>
-                    <div class="flex h-6 w-6 items-center justify-center rounded-full bg-primary">
-                        <span class="text-sm font-medium text-white">2</span>
-                    </div>
-                </div>
-            </a>
-            <a href="messages.html" class="flex items-center gap-5 px-7.5 py-3 hover:bg-gray-3 dark:hover:bg-meta-4">
-                <div class="relative h-14 w-14 rounded-full">
-                    <img src="{{asset('assets/img/dashboard/images/user/user-02.png')}}" alt="User" />
-                    <span
-                        class="absolute bottom-0 right-0 h-3.5 w-3.5 rounded-full border-2 border-white bg-meta-7"></span>
-                </div>
-
-                <div class="flex flex-1 items-center justify-between">
-                    <div>
-                        <h5 class="font-medium">Jubin Jack</h5>
-                        <p>
-                            <span class="text-sm font-medium">I really love that!</span>
-                            <span class="text-xs"> . Oct 23</span>
-                        </p>
-                    </div>
-                </div>
-            </a>
-            <a href="messages.html" class="flex items-center gap-5 px-7.5 py-3 hover:bg-gray-3 dark:hover:bg-meta-4">
-                <div class="relative h-14 w-14 rounded-full">
-                    <img src="{{asset('assets/img/dashboard/images/user/user-05.png')}}" alt="User" />
-                    <span
-                        class="absolute bottom-0 right-0 h-3.5 w-3.5 rounded-full border-2 border-white bg-meta-6"></span>
-                </div>
-
-                <div class="flex flex-1 items-center justify-between">
-                    <div>
-                        <h5 class="font-medium">Wilium Smith</h5>
-                        <p>
-                            <span class="text-sm font-medium">Where are you now?</span>
-                            <span class="text-xs"> . Sep 20</span>
-                        </p>
-                    </div>
-                </div>
-            </a>
-        </div>
-    </div>
-    <!-- ====== Chat Card End -->
-</div> --}}
-
 <div class="mt-5 col-span-12 rounded-sm border border-stroke bg-white py-6 shadow-default dark:border-strokedark dark:bg-boxdark xl:col-span-4">
     <div class="container mx-auto">
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Velit enim odio rerum blanditiis sapiente aspernatur laboriosam ullam ad esse natus obcaecati, in fugit quaerat ipsam quisquam eligendi, ratione quam placeat.
+        <table id="workerTable" class="display" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Position</th>
+                    <th>Office</th>
+                    <th>Age</th>
+                    <th>Start date</th>
+                    <th>Salary</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Tiger Nixon</td>
+                    <td>System Architect</td>
+                    <td>Edinburgh</td>
+                    <td>61</td>
+                    <td>2011-04-25</td>
+                    <td>$320,800</td>
+                </tr>
+                <tr>
+                    <td>Garrett Winters</td>
+                    <td>Accountant</td>
+                    <td>Tokyo</td>
+                    <td>63</td>
+                    <td>2011-07-25</td>
+                    <td>$170,750</td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th>Name</th>
+                    <th>Position</th>
+                    <th>Office</th>
+                    <th>Age</th>
+                    <th>Start date</th>
+                    <th>Salary</th>
+                </tr>
+            </tfoot>
+        </table>
     </div>
 </div>
 @endsection
+
+@push('js')
+    <script>
+        let table = new DataTable('#workerTable');
+    </script>
+@endpush

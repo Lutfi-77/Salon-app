@@ -8,6 +8,8 @@
     @vite('resources/css/app.css')
     <link rel="stylesheet" href="{{asset('assets/css/dashboard/style.css')}}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css">
+    @yield('css')
     <title>
       @yield('title', 'User Dashboard')
     </title>
@@ -52,5 +54,9 @@
     </div>
     <!-- ===== Page Wrapper End ===== -->
 
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/2.0.8/js/dataTables.min.js"></script>
+
+    @stack('js')
   </body>
 </html>

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Admin\AdminDashboardController;
+use App\Http\Controllers\Admin\AdminGalleryController;
 use App\Http\Controllers\AuthUserController;
 use App\Http\Controllers\CatalogueController;
 use App\Http\Controllers\GalleryController;
@@ -19,7 +20,7 @@ Route::get('/register', [AuthUserController::class, 'register'])->name('user.reg
 Route::post('/register', [AuthUserController::class, 'storeRegister'])->name('user.registerStore');
 
 // DASHBOARD USER
-Route::middleware(['cusAuth', 'role:customer'])->prefix('user')->group(function () {
+Route::middleware('role:customer')->prefix('user')->group(function () {
     Route::get('dashboard', [UserDashboardController::class, 'index'])->name('user.dashboard');
     Route::get('logout', [AuthUserController::class, 'logout'])->name('user.logout');
 });
@@ -28,6 +29,10 @@ Route::middleware(['cusAuth', 'role:customer'])->prefix('user')->group(function 
 // ADMIN ROUTES
 Route::get('/admin/login', [AdminAuthController::class, 'login'])->name('admin.login');
 Route::post('/admin/login', [AdminAuthController::class, 'authenticate'])->name('admin.authenticate');
-Route::middleware(['cusAuth', 'role:admin'])->prefix('admin')->group(function () {
+Route::middleware('role:admin')->prefix('admin')->group(function () {
     Route::get('dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
+
+    Route::get('gallery', [AdminGalleryController::class, 'index'])->name('admin.gallery');
+    Route::get('gallery/create', [AdminGalleryController::class, 'create'])->name('admin.gallery.create');
+    Route::post('gallery/create', [AdminGalleryController::class, 'store'])->name('admin.gallery.store');
 });
