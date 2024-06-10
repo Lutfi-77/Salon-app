@@ -33,17 +33,23 @@
             <div class="shadow-lg rounded-lg overflow-hidden">
                 <div class="grid grid-cols-1 md:grid-cols-2">
                     <div class="signform p-5">
-                        <h2 class="text-2xl mb-5">Sign In</h2>
-
-                        <form action="">
+                        <h2 class="text-2xl mb-5">Sign in</h2>
+                        @if ($errors->any())
+                            <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+                                @foreach ($errors->all() as $error)
+                                <span class="font-medium">{{ $error }}</span>
+                                @endforeach
+                            </div>
+                        @endif
+                        <form action="{{route('user.authenticate')}}" method="POST">
                             @csrf
                             <label class="mb-2 block">Email</label>
-                            <input type="email"
+                            <input type="email" name="email"
                                 class="appearance-none border-2 border-gray-200 rounded-xl w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-primary mb-5"
                                 required />
 
                             <label class="mb-2 block">Password</label>
-                            <input type="password" id="password"
+                            <input type="password" id="password" name="password"
                                 class="appearance-none border-2 border-gray-200 rounded-xl w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-primary mb-3"
                                 required />
                             <div class="flex items-center justify-end">
