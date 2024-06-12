@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminAccountController;
 use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\AdminGalleryController;
@@ -35,4 +36,9 @@ Route::middleware('role:admin')->prefix('admin')->group(function () {
     Route::get('gallery', [AdminGalleryController::class, 'index'])->name('admin.gallery');
     Route::get('gallery/create', [AdminGalleryController::class, 'create'])->name('admin.gallery.create');
     Route::post('gallery/create', [AdminGalleryController::class, 'store'])->name('admin.gallery.store');
+    Route::delete('gallery/{id}', [AdminGalleryController::class, 'destroy'])->name('admin.gallery.destroy');
+
+    Route::get('account', [AdminAccountController::class, 'index'])->name('admin.account.index');
+    Route::get('account/create', [AdminAccountController::class, 'create'])->name('admin.account.create');
+    Route::post('account/create', [AdminAccountController::class, 'store'])->name('admin.account.store');
 });

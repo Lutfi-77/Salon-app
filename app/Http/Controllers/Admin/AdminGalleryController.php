@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Gallery;
 use Illuminate\Http\Request;
+use Alert;
+use Illuminate\Support\Facades\Storage;
 
 class AdminGalleryController extends Controller
 {
@@ -12,7 +15,12 @@ class AdminGalleryController extends Controller
      */
     public function index()
     {
-        return view('admin.gallery.index');
+        $images = Gallery::all();
+        $title = 'Delete Image!';
+        $text = "Yakin mau dihapus?";
+        confirmDelete($title, $text);
+
+        return view('admin.gallery.index', compact('images'));
     }
 
     /**
@@ -30,9 +38,20 @@ class AdminGalleryController extends Controller
     {
         // dd($request->file);
         // return $request->file;
-        foreach ($request->file('images') as $image) {
-            $images = $image->store('/images');
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $image) {
+                // $images = $image->store('/images');
+                $model = new Gallery;
+                $images = $image->store('/images');
+                $model->url = $images;
+                $model->save();
+            }
+        }else{
+            return false;
         }
+        
+        Alert::toast('File berhasil diupload', 'success');
+        return true;
         // dd($request->file('images'));
     }
 
@@ -65,6 +84,15 @@ class AdminGalleryController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $images = Gallery::find($id);
+        if($images){
+            Storage::delete($images->url);
+            $images->delete();
+            Alert::toast('Gambar berhasil dihapus', 'success');
+            return redirect()->back();
+        }else{
+            Alert::toast('Gambar tidak tersedia untuk dihapus', 'error');
+            return redirect()->back();
+        }
     }
 }

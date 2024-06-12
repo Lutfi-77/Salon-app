@@ -9,9 +9,6 @@
 @section('content')
 <div class="mt-5 col-span-12 rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark xl:col-span-4 py-3">
     <div class="container mx-auto">
-        {{-- <form action="/file-upload" class="dropzone" id="my-dropzone" enctype="multipart/form-data">
-            <input type="file" name="file" class="hidden"/>
-        </form> --}}
         <form action="{{route('admin.gallery.store')}}" class="dropzone" id="my-dropzone" enctype="multipart/form-data">
             @csrf
             <div class="fallback">
@@ -52,8 +49,7 @@
 					dataType: 'json',
                     data: formData,
 					success: function(data){
-					    //console.log(data);
-                        
+					    console.log("data");
 					}
 				});
 
@@ -75,6 +71,8 @@
             this.on("successmultiple", function(files, response) {
                 // Gets triggered when the files have successfully been sent.
                 // Redirect user or notify of success.
+                console.log(response);
+                window.location = '{{route("admin.gallery")}}';
             });
             this.on("errormultiple", function(files, response) {
                 // Gets triggered when there was an error sending the files.
