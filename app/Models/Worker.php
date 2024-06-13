@@ -9,6 +9,14 @@ class Worker extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'phone',
+        'address',
+        'price',
+        'image',
+        'user_id'
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class);

@@ -29,15 +29,15 @@
                     <td>{{$worker->worker ? $worker->worker->address : "-"}}</td>
                     <td>{{$worker->worker ? $worker->worker->price : "-"}}</td>
                     <td>
-                        <img src="{{$worker->worker ? asset('storage/'.$worker->worker->image) : asset('assets/img/no_image.png')}}" alt="thumb">
+                        <img src="{{$worker->worker && $worker->worker->image != "" ? asset('storage/'.$worker->worker->image) : asset('assets/img/no_image.png')}}" alt="thumb">
                     </td>
                     <td>
                         <div class="flex gap-3">
                             <a href="{{route('admin.account.edit', $worker->id)}}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg">
                                 Edit
                             </a>
-                            <a href="#" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg">
-                                Hapus
+                            <a href="{{ route('admin.account.destroy', $worker->id) }}" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-l" data-confirm-delete="true">
+                                Delete
                             </a>
                         </div>
                     </td>

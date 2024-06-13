@@ -8,6 +8,7 @@ use App\Models\Worker;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Alert;
+use Illuminate\Support\Facades\Storage;
 
 class AdminAccountController extends Controller
 {
@@ -18,6 +19,9 @@ class AdminAccountController extends Controller
     {
         $workers = User::where('role', 'worker')->get();
         // $workers = User::all();
+        $title = 'Delete Account!';
+        $text = "Yakin mau dihapus?";
+        confirmDelete($title, $text);
         return view('admin.account.index', compact('workers'));
     }
 
@@ -84,32 +88,26 @@ class AdminAccountController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        // dd($request->all());
         $user = User::find($id);
-        $worker = Worker::find();
+        // $worker = Worker::find();
         $validated = $request->validate([
             'name' => 'required',
-            'email' => 'required|unique:users,email',
+            'email' => 'required',
             'password' => 'confirmed',
         ]);
         $user->name = $request->name;
         $user->email = $request->email;
-        $user->password = Hash::make($request->password);
+        $user->password = $request->password ? Hash::make($request->password) : $user->password;
         $user->role = $request->role;
+
+        $user->worker()->updateOrCreate(["user_id" => $user->id], [
+            "phone" => $request->phone,
+            "address" => $request->address,
+            "price" => $request->price,
+            "image" => $request->hasFile('image') ? $request->file('image')->store('/worker_img') : $user->worker->image,
+        ]);
         $user->save();
-
-        $user->worker()->updateOrCreate([
-            
-        ])
-
-        // $user->worker->phone = $request->phone;
-        // $user->worker->address = $request->address;
-        // $user->worker->price = $request->price;
-        // $user->worker->user_id = $user->id;
-        // if ($request->hasFile('image')){
-        //     $picture = $request->file('image')->store('/worker_img');
-        //     $user->worker->image = $picture;
-        // }
-        // $user->worker->save();
 
         Alert::toast('Data berhasi ditambahkan', 'success');
         return redirect()->route('admin.account.index');
@@ -120,6 +118,18 @@ class AdminAccountController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $user = User::find($id);
+        if($user){
+            if($user->worker && $user->worker->image != null){
+                Storage::delete($user->worker->image);
+                // dd("masuk");
+            }
+            $user->delete();
+            Alert::toast('Gambar berhasil dihapus', 'success');
+            return redirect()->back();
+        }else{
+            Alert::toast('Gambar tidak tersedia untuk dihapus', 'error');
+            return redirect()->back();
+        }
     }
 }

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminAccountController;
 use App\Http\Controllers\Admin\AdminAuthController;
+use App\Http\Controllers\Admin\AdminCategoryController;
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\AdminGalleryController;
 use App\Http\Controllers\AuthUserController;
@@ -42,4 +43,13 @@ Route::middleware('role:admin')->prefix('admin')->group(function () {
     Route::get('account/create', [AdminAccountController::class, 'create'])->name('admin.account.create');
     Route::post('account/create', [AdminAccountController::class, 'store'])->name('admin.account.store');
     Route::get('account/edit/{id}', [AdminAccountController::class, 'edit'])->name('admin.account.edit');
+    Route::post('account/edit/{id}', [AdminAccountController::class, 'update'])->name('admin.account.update');
+    Route::delete('account/delete/{id}', [AdminAccountController::class, 'destroy'])->name('admin.account.destroy');
+
+    Route::get('category', [AdminCategoryController::class, 'index'])->name('admin.category.index');
+    Route::get('category/create', [AdminCategoryController::class, 'create'])->name('admin.category.create');
+    Route::post('category/create', [AdminCategoryController::class, 'store'])->name('admin.category.store');
+    Route::get('category/edit/{id}', [AdminCategoryController::class, 'edit'])->name('admin.category.edit');
+    Route::post('category/edit/{id}', [AdminCategoryController::class, 'update'])->name('admin.category.update');
+    Route::delete('category/delete/{id}', [AdminCategoryController::class, 'destroy'])->name('admin.category.destroy');
 });

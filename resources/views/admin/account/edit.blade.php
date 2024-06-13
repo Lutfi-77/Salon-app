@@ -3,7 +3,7 @@
 @section('title', 'Admin Account Edit')
 
 @section('content')
-<form action="{{route('admin.account.store')}}" method="POST" enctype="multipart/form-data">
+<form action="{{route('admin.account.update', $worker->id)}}" method="POST" enctype="multipart/form-data">
     @csrf
     <div class="mt-5 col-span-12 rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark xl:col-span-4 py-3">
         <div class="container mx-auto">
@@ -29,12 +29,12 @@
                 <div class="form-group">
                     <label class="mb-2 block">Password</label>
                     <input type="password" id="password" name="password" class="appearance-none border-2 border-gray-200 rounded-xl w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-primary mb-5"
-                        required />
+                        />
                 </div>
                 <div class="form-group">
                     <label class="mb-2 block">Confirm Password</label>
                     <input type="password" id="cpassword" name="password_confirmation" class="appearance-none border-2 border-gray-200 rounded-xl w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-primary mb-5"
-                        required />
+                        />
 
                     <div class="flex items-center justify-end">
                         <input type="checkbox" id="showPass"
@@ -74,8 +74,7 @@
                 </div>
                 <div class="form-group">
                     <label class="mb-2 block">Image</label>
-                    <input type="file" name="image" class="appearance-none border-2 border-gray-200 rounded-xl w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-primary mb-5"
-                        required />
+                    <input type="file" name="image" class="appearance-none border-2 border-gray-200 rounded-xl w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-primary mb-5" />
                 </div>
             </div>
             <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg">

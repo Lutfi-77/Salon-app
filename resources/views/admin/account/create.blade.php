@@ -64,8 +64,7 @@
                 </div>
                 <div class="form-group">
                     <label class="mb-2 block">Address</label>
-                    <input type="text" name="address" class="appearance-none border-2 border-gray-200 rounded-xl w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-primary mb-5"
-                        required />
+                    <textarea name="address" class="appearance-none border-2 border-gray-200 rounded-xl w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-primary mb-5"></textarea>
                 </div>
                 <div class="form-group">
                     <label class="mb-2 block">Price</label>
@@ -74,8 +73,7 @@
                 </div>
                 <div class="form-group">
                     <label class="mb-2 block">Image</label>
-                    <input type="file" name="image" class="appearance-none border-2 border-gray-200 rounded-xl w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-primary mb-5"
-                        required />
+                    <input type="file" name="image" class="appearance-none border-2 border-gray-200 rounded-xl w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-primary mb-5" />
                 </div>
             </div>
             <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg">
