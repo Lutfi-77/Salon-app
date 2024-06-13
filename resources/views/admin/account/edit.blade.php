@@ -1,6 +1,6 @@
 @extends('admin.template.app')
 
-@section('title', 'Admin Account Add')
+@section('title', 'Admin Account Edit')
 
 @section('content')
 <form action="{{route('admin.account.store')}}" method="POST" enctype="multipart/form-data">
@@ -14,15 +14,16 @@
                     @endforeach
                 </div>
             @endif
+            <small class="text-red-500">*Kosongkan bagian password dan foto jika tidak ingin diubah</small>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
                 <div class="form-group">
                     <label class="mb-2 block">Name</label>
-                    <input type="text" name="name" class="appearance-none border-2 border-gray-200 rounded-xl w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-primary mb-5"
+                    <input type="text" name="name" value="{{$worker->name}}" class="appearance-none border-2 border-gray-200 rounded-xl w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-primary mb-5"
                         required />
                 </div>
                 <div class="form-group">
                     <label class="mb-2 block">Email</label>
-                    <input type="email" name="email" class="appearance-none border-2 border-gray-200 rounded-xl w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-primary mb-5"
+                    <input type="email" name="email" value="{{$worker->email}}" class="appearance-none border-2 border-gray-200 rounded-xl w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-primary mb-5"
                         required />
                 </div>
                 <div class="form-group">
@@ -46,8 +47,8 @@
                 <div class="form-group">
                     <label class="mb-2 block">Role</label>
                     <select name="role" class="border-2 border-gray-200 rounded-xl w-full py-2 px-4 text-gray-700 focus:outline-none focus:bg-white focus:border-primary mb-5">
-                        <option value="worker">Worker</option>
-                        <option value="admin">Admin</option>
+                        <option value="worker" {{$worker->role == "worker" ? "selected" : ""}}>Worker</option>
+                        <option value="admin" {{$worker->role == "admin" ? "selected" : ""}}>Admin</option>
                     </select>
                 </div>
             </div>
@@ -59,17 +60,16 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
                 <div class="form-group">
                     <label class="mb-2 block">Phone</label>
-                    <input type="text" name="phone" class="appearance-none border-2 border-gray-200 rounded-xl w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-primary mb-5"
+                    <input type="text" name="phone" value="{{$worker->worker ? $worker->worker->phone : ''}}" class="appearance-none border-2 border-gray-200 rounded-xl w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-primary mb-5"
                         required />
                 </div>
                 <div class="form-group">
                     <label class="mb-2 block">Address</label>
-                    <input type="text" name="address" class="appearance-none border-2 border-gray-200 rounded-xl w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-primary mb-5"
-                        required />
+                    <textarea name="address" class="appearance-none border-2 border-gray-200 rounded-xl w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-primary mb-5">{{$worker->worker ? $worker->worker->address : ''}}</textarea>
                 </div>
                 <div class="form-group">
                     <label class="mb-2 block">Price</label>
-                    <input type="text" name="price" class="appearance-none border-2 border-gray-200 rounded-xl w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-primary mb-5"
+                    <input type="text" name="price" value="{{$worker->worker ? $worker->worker->price : ''}}" class="appearance-none border-2 border-gray-200 rounded-xl w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-primary mb-5"
                         required />
                 </div>
                 <div class="form-group">

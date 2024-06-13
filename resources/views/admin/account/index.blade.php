@@ -12,21 +12,28 @@
             <thead>
                 <tr>
                     <th>Name</th>
+                    <th>Email</th>
                     <th>No. Phone</th>
                     <th>Address</th>
                     <th>Price</th>
+                    <th>Image</th>
                     <th>Action</th>
                 </tr>
             </thead>
             <tbody>
+                @foreach ($workers as $worker)
                 <tr>
-                    <td>Tiger Nixon</td>
-                    <td>System Architect</td>
-                    <td>Edinburgh</td>
-                    <td>61</td>
+                    <td>{{$worker->name}}</td>
+                    <td>{{$worker->email}}</td>
+                    <td>{{$worker->worker ? $worker->worker->phone : "-"}}</td>
+                    <td>{{$worker->worker ? $worker->worker->address : "-"}}</td>
+                    <td>{{$worker->worker ? $worker->worker->price : "-"}}</td>
+                    <td>
+                        <img src="{{$worker->worker ? asset('storage/'.$worker->worker->image) : asset('assets/img/no_image.png')}}" alt="thumb">
+                    </td>
                     <td>
                         <div class="flex gap-3">
-                            <a href="#" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg">
+                            <a href="{{route('admin.account.edit', $worker->id)}}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg">
                                 Edit
                             </a>
                             <a href="#" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg">
@@ -35,13 +42,16 @@
                         </div>
                     </td>
                 </tr>
+                @endforeach
             </tbody>
             <tfoot>
                 <tr>
                     <th>Name</th>
+                    <th>Email</th>
                     <th>No. Phone</th>
                     <th>Address</th>
                     <th>Price</th>
+                    <th>Image</th>
                     <th>Action</th>
                 </tr>
             </tfoot>

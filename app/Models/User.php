@@ -46,7 +46,7 @@ class User extends Authenticatable
         ];
     }
     
-    public function workers()
+    public function worker()
     {
         return $this->hasOne(Worker::class);
     }

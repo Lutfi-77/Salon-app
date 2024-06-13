@@ -16,7 +16,9 @@ class AdminAccountController extends Controller
      */
     public function index()
     {
-        return view('admin.account.index');
+        $workers = User::where('role', 'worker')->get();
+        // $workers = User::all();
+        return view('admin.account.index', compact('workers'));
     }
 
     /**
@@ -39,6 +41,7 @@ class AdminAccountController extends Controller
             'email' => 'required|unique:users,email',
             'password' => 'confirmed',
         ]);
+
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
@@ -55,9 +58,8 @@ class AdminAccountController extends Controller
         }
         $worker->save();
 
-        Alert::toast('File berhasil diupload', 'success');
+        Alert::toast('Data berhasi ditambahkan', 'success');
         return redirect()->route('admin.account.index');
-        // dd($request->all());
     }
 
     /**
@@ -73,7 +75,8 @@ class AdminAccountController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $worker = User::find($id);
+        return view('admin.account.edit', compact('worker'));
     }
 
     /**
@@ -81,7 +84,35 @@ class AdminAccountController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $user = User::find($id);
+        $worker = Worker::find();
+        $validated = $request->validate([
+            'name' => 'required',
+            'email' => 'required|unique:users,email',
+            'password' => 'confirmed',
+        ]);
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+        $user->role = $request->role;
+        $user->save();
+
+        $user->worker()->updateOrCreate([
+            
+        ])
+
+        // $user->worker->phone = $request->phone;
+        // $user->worker->address = $request->address;
+        // $user->worker->price = $request->price;
+        // $user->worker->user_id = $user->id;
+        // if ($request->hasFile('image')){
+        //     $picture = $request->file('image')->store('/worker_img');
+        //     $user->worker->image = $picture;
+        // }
+        // $user->worker->save();
+
+        Alert::toast('Data berhasi ditambahkan', 'success');
+        return redirect()->route('admin.account.index');
     }
 
     /**

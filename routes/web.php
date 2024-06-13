@@ -41,4 +41,5 @@ Route::middleware('role:admin')->prefix('admin')->group(function () {
     Route::get('account', [AdminAccountController::class, 'index'])->name('admin.account.index');
     Route::get('account/create', [AdminAccountController::class, 'create'])->name('admin.account.create');
     Route::post('account/create', [AdminAccountController::class, 'store'])->name('admin.account.store');
+    Route::get('account/edit/{id}', [AdminAccountController::class, 'edit'])->name('admin.account.edit');
 });
