@@ -5,6 +5,8 @@ use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Admin\AdminCategoryController;
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\AdminGalleryController;
+use App\Http\Controllers\Admin\AdminManageController;
+use App\Http\Controllers\Admin\AdminProfileController;
 use App\Http\Controllers\AuthUserController;
 use App\Http\Controllers\CatalogueController;
 use App\Http\Controllers\GalleryController;
@@ -25,7 +27,8 @@ Route::post('/register', [AuthUserController::class, 'storeRegister'])->name('us
 Route::middleware('role:customer')->prefix('user')->group(function () {
     Route::get('dashboard', [UserDashboardController::class, 'index'])->name('user.dashboard');
     Route::get('logout', [AuthUserController::class, 'logout'])->name('user.logout');
-});
+    });
+Route::get('logout', [AuthUserController::class, 'logout'])->name('user.logout');
     
     
 // ADMIN ROUTES
@@ -33,6 +36,8 @@ Route::get('/admin/login', [AdminAuthController::class, 'login'])->name('admin.l
 Route::post('/admin/login', [AdminAuthController::class, 'authenticate'])->name('admin.authenticate');
 Route::middleware('role:admin')->prefix('admin')->group(function () {
     Route::get('dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
+    Route::get('profile', [AdminProfileController::class, 'index'])->name('admin.profile');
+    Route::post('profile/edit', [AdminProfileController::class, 'editProfile'])->name('admin.profile.edit');
 
     Route::get('gallery', [AdminGalleryController::class, 'index'])->name('admin.gallery');
     Route::get('gallery/create', [AdminGalleryController::class, 'create'])->name('admin.gallery.create');
@@ -45,6 +50,13 @@ Route::middleware('role:admin')->prefix('admin')->group(function () {
     Route::get('account/edit/{id}', [AdminAccountController::class, 'edit'])->name('admin.account.edit');
     Route::post('account/edit/{id}', [AdminAccountController::class, 'update'])->name('admin.account.update');
     Route::delete('account/delete/{id}', [AdminAccountController::class, 'destroy'])->name('admin.account.destroy');
+    
+    Route::get('adminacc', [AdminManageController::class, 'index'])->name('admin.manage.index');
+    Route::get('adminacc/create', [AdminManageController::class, 'create'])->name('admin.manage.create');
+    Route::post('adminacc/create', [AdminManageController::class, 'store'])->name('admin.manage.store');
+    Route::get('adminacc/edit/{id}', [AdminManageController::class, 'edit'])->name('admin.manage.edit');
+    Route::post('adminacc/edit/{id}', [AdminManageController::class, 'update'])->name('admin.manage.update');
+    Route::delete('adminacc/delete/{id}', [AdminManageController::class, 'destroy'])->name('admin.manage.destroy');
 
     Route::get('category', [AdminCategoryController::class, 'index'])->name('admin.category.index');
     Route::get('category/create', [AdminCategoryController::class, 'create'])->name('admin.category.create');

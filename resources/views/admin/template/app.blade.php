@@ -26,13 +26,13 @@
   <script src="https://cdn.jsdelivr.net/npm/@alpinejs/persist@3.x.x/dist/cdn.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <!-- ===== Preloader Start ===== -->
-    {{-- @include('users.template.preloader') --}}
+    {{-- @include('admin.template.preloader') --}}
     <!-- ===== Preloader End ===== -->
 
     <!-- ===== Page Wrapper Start ===== -->
     <div class="flex h-screen overflow-hidden">
       <!-- ===== Sidebar Start ===== -->
-      @include('users.template.sidebar')
+      @include('admin.template.sidebar')
       <!-- ===== Sidebar End ===== -->
 
       <!-- ===== Content Area Start ===== -->
@@ -40,7 +40,7 @@
         class="relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden"
       >
         <!-- ===== Header Start ===== -->
-        @include('users.template.header')
+        @include('admin.template.header')
         <!-- ===== Header End ===== -->
 
         <!-- ===== Main Content Start ===== -->

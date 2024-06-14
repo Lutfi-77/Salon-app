@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('phone');
             $table->string('address');
             $table->string('price');
+            $table->string('specialist');
             $table->string('image')->nullable();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->timestamps();

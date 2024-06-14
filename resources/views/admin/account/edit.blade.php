@@ -59,6 +59,14 @@
         <div class="container mx-auto">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
                 <div class="form-group">
+                    <label class="mb-2 block">Specialist</label>
+                    <select name="specialist" class="border-2 border-gray-200 rounded-xl w-full py-2 px-4 text-gray-700 focus:outline-none focus:bg-white focus:border-primary mb-5">
+                        @foreach ($categories as $category)
+                            <option value="{{$category->title}}">{{ucfirst($category->title)}}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="form-group">
                     <label class="mb-2 block">Phone</label>
                     <input type="text" name="phone" value="{{$worker->worker ? $worker->worker->phone : ''}}" class="appearance-none border-2 border-gray-200 rounded-xl w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-primary mb-5"
                         required />

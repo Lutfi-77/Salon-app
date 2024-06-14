@@ -3,6 +3,9 @@
 @section('title', 'Admin Gallery')
 
 @section('content')
+<a href="{{route('admin.gallery.create')}}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg">
+    Tambah Gambar
+</a>
 <div class="mt-5 col-span-12 rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark xl:col-span-4 py-3 w-full h-full">
     <div class="container mx-auto">
         <div class="grid md:grid-cols-3 grid-cols-2 gap-5">

@@ -161,39 +161,35 @@
             <thead>
                 <tr>
                     <th>Name</th>
-                    <th>Position</th>
-                    <th>Office</th>
-                    <th>Age</th>
-                    <th>Start date</th>
-                    <th>Salary</th>
+                    <th>Email</th>
+                    <th>No. Phone</th>
+                    <th>Address</th>
+                    <th>Price</th>
+                    <th>Image</th>
                 </tr>
             </thead>
             <tbody>
+                @foreach ($workers as $worker)
                 <tr>
-                    <td>Tiger Nixon</td>
-                    <td>System Architect</td>
-                    <td>Edinburgh</td>
-                    <td>61</td>
-                    <td>2011-04-25</td>
-                    <td>$320,800</td>
+                    <td>{{$worker->name}}</td>
+                    <td>{{$worker->email}}</td>
+                    <td>{{$worker->worker ? $worker->worker->phone : "-"}}</td>
+                    <td>{{$worker->worker ? $worker->worker->address : "-"}}</td>
+                    <td>{{$worker->worker ? $worker->worker->price : "-"}}</td>
+                    <td>
+                        <img class="w-24 h-24 object-cover" src="{{$worker->worker && $worker->worker->image != "" ? asset('storage/'.$worker->worker->image) : asset('assets/img/no_image.png')}}" alt="thumb">
+                    </td>
                 </tr>
-                <tr>
-                    <td>Garrett Winters</td>
-                    <td>Accountant</td>
-                    <td>Tokyo</td>
-                    <td>63</td>
-                    <td>2011-07-25</td>
-                    <td>$170,750</td>
-                </tr>
+                @endforeach
             </tbody>
             <tfoot>
                 <tr>
                     <th>Name</th>
-                    <th>Position</th>
-                    <th>Office</th>
-                    <th>Age</th>
-                    <th>Start date</th>
-                    <th>Salary</th>
+                    <th>Email</th>
+                    <th>No. Phone</th>
+                    <th>Address</th>
+                    <th>Price</th>
+                    <th>Image</th>
                 </tr>
             </tfoot>
         </table>

@@ -1,6 +1,6 @@
 @extends('admin.template.app')
 
-@section('title', 'Admin Gallery')
+@section('title', 'Admin Account Worker Management')
 
 @section('content')
 <a href="{{route('admin.account.create')}}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg">
@@ -36,7 +36,7 @@
                             <a href="{{route('admin.account.edit', $worker->id)}}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg">
                                 Edit
                             </a>
-                            <a href="{{ route('admin.account.destroy', $worker->id) }}" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-l" data-confirm-delete="true">
+                            <a href="{{ route('admin.account.destroy', $worker->id) }}" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg" data-confirm-delete="true">
                                 Delete
                             </a>
                         </div>
