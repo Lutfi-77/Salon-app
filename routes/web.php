@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminAccountController;
 use App\Http\Controllers\Admin\AdminAuthController;
+use App\Http\Controllers\Admin\AdminCatalogueController;
 use App\Http\Controllers\Admin\AdminCategoryController;
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\AdminGalleryController;
@@ -64,4 +65,11 @@ Route::middleware('role:admin')->prefix('admin')->group(function () {
     Route::get('category/edit/{id}', [AdminCategoryController::class, 'edit'])->name('admin.category.edit');
     Route::post('category/edit/{id}', [AdminCategoryController::class, 'update'])->name('admin.category.update');
     Route::delete('category/delete/{id}', [AdminCategoryController::class, 'destroy'])->name('admin.category.destroy');
+
+    Route::get('catalogue', [AdminCatalogueController::class, 'index'])->name('admin.catalogue.index');
+    Route::get('catalogue/create', [AdminCatalogueController::class, 'create'])->name('admin.catalogue.create');
+    Route::post('catalogue/create', [AdminCatalogueController::class, 'store'])->name('admin.catalogue.store');
+    Route::get('catalogue/edit/{id}', [AdminCatalogueController::class, 'edit'])->name('admin.catalogue.edit');
+    Route::post('catalogue/edit/{id}', [AdminCatalogueController::class, 'update'])->name('admin.catalogue.update');
+    Route::delete('catalogue/delete/{id}', [AdminCatalogueController::class, 'destroy'])->name('admin.catalogue.destroy');
 });

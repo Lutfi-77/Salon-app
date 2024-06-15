@@ -3,6 +3,7 @@
         ['url' => route('admin.dashboard'), 'title' => 'Dashboard'],
         ['url' => route('admin.category.index'), 'title' => 'Category'],
         ['url' => route('admin.gallery'), 'title' => 'Gallery'],
+        ['url' => route('admin.catalogue.index'), 'title' => 'Catalogue'],
     ]
 @endphp
 

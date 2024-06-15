@@ -5,12 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Category extends Model
+class Catalogue extends Model
 {
     use HasFactory;
 
-    public function catalogue()
+    public function category()
     {
-        return $this->hasMany(Catalogue::class);
+        return $this->belongsTo(Category::class);
     }
+    
 }
