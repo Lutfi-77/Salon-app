@@ -170,42 +170,17 @@
                         </div>
                         <div class="swiper-wrapper p-3">
                             <!-- Slides -->
-                            <div class="swiper-slide max-w-fit">
-                                <div
-                                    class="card max-w-fit shadow-lg rounded-md overflow-hidden">
-                                    <div class="card-image w-32 h-32 md:w-64 md:h-64">
-                                        <img src="https://www.infinumgrowth.com/wp-content/uploads/2022/06/Smile-1-scaled.jpg"  class="w-full h-full" alt="worker">
+                            @foreach ($workers as $worker)
+                                <div class="swiper-slide max-w-fit">
+                                    <div
+                                        class="card max-w-fit shadow-lg rounded-md overflow-hidden">
+                                        <div class="card-image w-32 h-32 md:w-64 md:h-64">
+                                            <img src="{{asset('storage/'.$worker->worker->image)}}"  class="w-full h-full" alt="worker">
+                                        </div>
+                                        <h3 class="text-black font-semibold p-3 text-center">{{$worker->name}}</h3>
                                     </div>
-                                    <h3 class="text-black font-semibold p-3 text-center">Dawan Lutfi</h3>
                                 </div>
-                            </div>
-                            <div class="swiper-slide max-w-fit">
-                                <div
-                                    class="card max-w-fit shadow-lg rounded-md overflow-hidden">
-                                    <div class="card-image w-32 h-32 md:w-64 md:h-64">
-                                        <img src="https://www.infinumgrowth.com/wp-content/uploads/2022/06/Smile-1-scaled.jpg"  class="w-full h-full" alt="worker">
-                                    </div>
-                                    <h3 class="text-black font-semibold p-3 text-center">Dawan Lutfi</h3>
-                                </div>
-                            </div>
-                            <div class="swiper-slide max-w-fit">
-                                <div
-                                    class="card max-w-fit shadow-lg rounded-md overflow-hidden">
-                                    <div class="card-image w-32 h-32 md:w-64 md:h-64">
-                                        <img src="https://www.infinumgrowth.com/wp-content/uploads/2022/06/Smile-1-scaled.jpg"  class="w-full h-full" alt="worker">
-                                    </div>
-                                    <h3 class="text-black font-semibold p-3 text-center">Dawan Lutfi</h3>
-                                </div>
-                            </div>
-                            <div class="swiper-slide max-w-fit">
-                                <div
-                                    class="card max-w-fit shadow-lg rounded-md overflow-hidden">
-                                    <div class="card-image w-32 h-32 md:w-64 md:h-64">
-                                        <img src="https://www.infinumgrowth.com/wp-content/uploads/2022/06/Smile-1-scaled.jpg"  class="w-full h-full" alt="worker">
-                                    </div>
-                                    <h3 class="text-black font-semibold p-3 text-center">Dawan Lutfi</h3>
-                                </div>
-                            </div>
+                            @endforeach
                         </div>
                     {{-- </div> --}}
                     <!-- If we need pagination -->

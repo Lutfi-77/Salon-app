@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Gallery;
 use Illuminate\Http\Request;
 
 class GalleryController extends Controller
@@ -9,7 +10,8 @@ class GalleryController extends Controller
     
     public function index()
     {
-        return view('gallery');
+        $images = Gallery::paginate(2);
+        return view('gallery', compact('images'));
     }
 
 }

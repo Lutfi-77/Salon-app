@@ -10,16 +10,9 @@
         <div class="flex items-center justify-between w-full md:w-1/2 mx-auto gap-5">
             <i class="fa-solid fa-arrow-left text-2xl cursor-pointer text-primary leftArrow !hidden"></i>
             <div class="flex gap-5 overflow-x-auto [&::-webkit-scrollbar]:hidden snap-x scrollbar scroll-smooth">
-                <div class="py-1 px-5 rounded-lg border cursor-pointer snap-center shadow-md">Test</div>
-                <div class="py-1 px-5 rounded-lg border cursor-pointer snap-center shadow-md">Test</div>
-                <div class="py-1 px-5 rounded-lg border cursor-pointer snap-center shadow-md">Test</div>
-                <div class="py-1 px-5 rounded-lg border cursor-pointer snap-center shadow-md">Test</div>
-                <div class="py-1 px-5 rounded-lg border cursor-pointer snap-center shadow-md">Test</div>
-                <div class="py-1 px-5 rounded-lg border cursor-pointer snap-center shadow-md">Test</div>
-                <div class="py-1 px-5 rounded-lg border cursor-pointer snap-center shadow-md">Test</div>
-                <div class="py-1 px-5 rounded-lg border cursor-pointer snap-center shadow-md">Test</div>
-                <div class="py-1 px-5 rounded-lg border cursor-pointer snap-center shadow-md">Test</div>
-                <div class="py-1 px-5 rounded-lg border cursor-pointer snap-center shadow-md">Test</div>
+                @foreach ($categories as $category)
+                    <div class="py-1 px-5 rounded-lg border cursor-pointer snap-center shadow-md">{{$category->title}}</div>
+                @endforeach
             </div>
             <i class="fa-solid fa-arrow-right text-2xl cursor-pointer text-primary rightArrow"></i>
         </div>

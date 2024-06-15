@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class CatalogueController extends Controller
@@ -9,7 +10,8 @@ class CatalogueController extends Controller
     
     public function index()
     {
-        return view('catalogue');
+        $categories = Category::all();
+        return view('catalogue', compact('categories'));
     }
 
 }
