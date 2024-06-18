@@ -14,7 +14,8 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'Alert' => RealRashid\SweetAlert\Facades\Alert::class,
             'cusAuth' => App\Http\Middleware\CustomAuth::class,
-            'role' => App\Http\Middleware\RoleCheck::class
+            'role' => App\Http\Middleware\RoleCheck::class,
+            'profileCheck' => App\Http\Middleware\ProfileCheck::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

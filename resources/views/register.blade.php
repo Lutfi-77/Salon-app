@@ -29,7 +29,7 @@
 <body>
     @include('sweetalert::alert')
     <div class="w-full h-full flex justify-center items-center">
-        <div class="max-w-lg">
+        <div class="w-full">
             <div class="container mx-auto">
                 <div class="shadow-lg rounded-lg overflow-hidden">
                     <div class="signform p-5">
@@ -41,9 +41,9 @@
                                 @endforeach
                             </div>
                         @endif
-                        <form action="{{route('user.registerStore')}}" method="POST">
+                        <form action="{{route('user.registerStore')}}" method="POST" enctype="multipart/form-data">
                             @csrf
-                            <div class="flex gap-2">
+                            <div class="grid grid-cols-2 gap-3">
                                 <div class="form-group">
                                     <label class="mb-2 block">Name</label>
                                     <input type="text" name="name"
@@ -57,24 +57,41 @@
                                         class="appearance-none border-2 border-gray-200 rounded-xl w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-primary mb-5"
                                         required />
                                 </div>
-                            </div>
+                                
+                                <div class="form-group">
+                                    <label class="mb-2 block">Password</label>
+                                    <input type="password" id="password" name="password"
+                                        class="appearance-none border-2 border-gray-200 rounded-xl w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-primary mb-5"
+                                        required />
+                                </div>
+                                <div class="form-group">
+                                    <label class="mb-2 block">Confirm Password</label>
+                                    <input type="password" id="cpassword" name="password_confirmation"
+                                        class="appearance-none border-2 border-gray-200 rounded-xl w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-primary mb-3"
+                                        required />
+                                        
+                                    <div class="flex items-center justify-end">
+                                        <input type="checkbox" id="showPass"
+                                            class="w-4 h-4 mr-2 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                        <label for="showPass">
+                                            Show Password
+                                        </label>
+                                    </div>
+                                </div>
 
-                            <label class="mb-2 block">Password</label>
-                            <input type="password" id="password" name="password"
-                                class="appearance-none border-2 border-gray-200 rounded-xl w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-primary mb-5"
-                                required />
-
-                            <label class="mb-2 block">Confirm Password</label>
-                            <input type="password" id="cpassword" name="password_confirmation"
-                                class="appearance-none border-2 border-gray-200 rounded-xl w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-primary mb-3"
-                                required />
-
-                            <div class="flex items-center justify-end">
-                                <input type="checkbox" id="showPass"
-                                    class="w-4 h-4 mr-2 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                <label for="showPass">
-                                    Show Password
-                                </label>
+                                <div class="form-group">
+                                    <label class="mb-2 block">Phone</label>
+                                    <input type="text" name="phone" value="" class="appearance-none border-2 border-gray-200 rounded-xl w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-primary mb-5"
+                                        required />
+                                </div>
+                                <div class="form-group">
+                                    <label class="mb-2 block">Address</label>
+                                    <textarea name="address" class="appearance-none border-2 border-gray-200 rounded-xl w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-primary mb-5"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label class="mb-2 block">Image</label>
+                                    <input type="file" name="image" value="" class="appearance-none border-2 border-gray-200 rounded-xl w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-primary mb-5" />
+                                </div>
                             </div>
 
                             <button class="w-full block ml-auto bg-primary py-2 text-white rounded-lg mt-3">Register</button>

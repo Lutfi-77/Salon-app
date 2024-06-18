@@ -13,10 +13,11 @@ use App\Http\Controllers\CatalogueController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\User\UserDashboardController;
+use App\Http\Controllers\User\UserProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/catalogue', [CatalogueController::class, 'index'])->name('catalogue');
+Route::get('/catalogue/{category?}', [CatalogueController::class, 'index'])->name('catalogue');
 Route::get('/gallery', [GalleryController::class, 'index'])->name('gallery');
 
 Route::get('/login', [AuthUserController::class, 'login'])->name('user.login');
@@ -25,11 +26,12 @@ Route::get('/register', [AuthUserController::class, 'register'])->name('user.reg
 Route::post('/register', [AuthUserController::class, 'storeRegister'])->name('user.registerStore');
 
 // DASHBOARD USER
-Route::middleware('role:customer')->prefix('user')->group(function () {
+Route::middleware(['role:customer', 'profileCheck'])->prefix('user')->group(function () {
     Route::get('dashboard', [UserDashboardController::class, 'index'])->name('user.dashboard');
     Route::get('logout', [AuthUserController::class, 'logout'])->name('user.logout');
-    });
-Route::get('logout', [AuthUserController::class, 'logout'])->name('user.logout');
+    Route::resource('profile', UserProfileController::class);
+    Route::post('logout', [AuthUserController::class, 'logout'])->name('user.logout');
+});
     
     
 // ADMIN ROUTES

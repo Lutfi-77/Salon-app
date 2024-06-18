@@ -11,7 +11,7 @@
             <i class="fa-solid fa-arrow-left text-2xl cursor-pointer text-primary leftArrow !hidden"></i>
             <div class="flex gap-5 overflow-x-auto [&::-webkit-scrollbar]:hidden snap-x scrollbar scroll-smooth">
                 @foreach ($categories as $category)
-                    <div class="py-1 px-5 rounded-lg border cursor-pointer snap-center shadow-md">{{$category->title}}</div>
+                    <a href="{{route('catalogue', $category->id)}}" class="py-1 px-5 rounded-lg border cursor-pointer snap-center shadow-md">{{$category->title}}</a>
                 @endforeach
             </div>
             <i class="fa-solid fa-arrow-right text-2xl cursor-pointer text-primary rightArrow"></i>
@@ -19,36 +19,14 @@
 
 
         <div class="grid grid-cols-2 md:grid-cols-4 mt-10 gap-5">
-            <div class="relative rounded-lg overflow-hidden">
-                <img src="{{asset('assets/img/wolfcut.png')}}" class="w-full" alt="catalogue">
-                <div class="absolute top-1 left-1 bg-white px-5 py-1 font-semibold rounded-lg">
-                    Haircut
+            @foreach ($catalogues as $catalogue)
+                <div class="relative rounded-lg overflow-hidden">
+                    <img src="{{asset('storage/'.$catalogue->image)}}" class="w-full" alt="catalogue">
+                    <div class="absolute top-1 left-1 bg-white px-5 py-1 font-semibold rounded-lg">
+                        {{$catalogue->title}}
+                    </div>
                 </div>
-            </div>
-            <div class="relative rounded-lg overflow-hidden">
-                <img src="{{asset('assets/img/wolfcut.png')}}" class="w-full" alt="catalogue">
-                <div class="absolute top-1 left-1 bg-white px-5 py-1 font-semibold rounded-lg">
-                    Haircut
-                </div>
-            </div>
-            <div class="relative rounded-lg overflow-hidden">
-                <img src="{{asset('assets/img/wolfcut.png')}}" class="w-full" alt="catalogue">
-                <div class="absolute top-1 left-1 bg-white px-5 py-1 font-semibold rounded-lg">
-                    Haircut
-                </div>
-            </div>
-            <div class="relative rounded-lg overflow-hidden">
-                <img src="{{asset('assets/img/wolfcut.png')}}" class="w-full" alt="catalogue">
-                <div class="absolute top-1 left-1 bg-white px-5 py-1 font-semibold rounded-lg">
-                    Haircut
-                </div>
-            </div>
-            <div class="relative rounded-lg overflow-hidden">
-                <img src="{{asset('assets/img/wolfcut.png')}}" class="w-full" alt="catalogue">
-                <div class="absolute top-1 left-1 bg-white px-5 py-1 font-semibold rounded-lg">
-                    Haircut
-                </div>
-            </div>
+            @endforeach
         </div>
     </div>
 </section>

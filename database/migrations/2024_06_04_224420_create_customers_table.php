@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('phone');
             $table->string('address');
-            $table->string('image');
+            $table->string('image')->nullable();
             $table->foreignId('user_id')->constrained();
             $table->timestamps();
         });

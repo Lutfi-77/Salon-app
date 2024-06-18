@@ -22,10 +22,14 @@ class AuthUserController extends Controller
 
     public function storeRegister(Request $request)
     {
+        // dd($request->file('image'));
         $validated = $request->validate([
             'name' => 'required',
             'email' => 'required|unique:users,email',
-            'password' => 'confirmed'
+            'password' => 'required|confirmed',
+            'phone' => 'required',
+            'address' => 'required',
+            'image' => 'mimes:jpg,jpeg,bmp,png',
         ]);
         
         $user = new User;
@@ -33,6 +37,13 @@ class AuthUserController extends Controller
         $user->email = $request->email;
         $user->password = $request->password;
         $user->role = 'customer';
+        $user->save();
+
+        $user->customer()->updateOrCreate(["user_id" => $user->id], [
+            "phone" => $request->phone,
+            "address" => $request->address,
+            "image" => $request->hasFile('image') ? $request->file('image')->store('/customer_img') : '',
+        ]);
         $user->save();
 
         Alert::success('Berhasil', 'Data berhasil di registrasi');
@@ -57,13 +68,13 @@ class AuthUserController extends Controller
         ])->onlyInput('email');
     }
 
-    public function logout()
+    public function logout(Request $request)
     {
         Auth::logout();
  
-        // $request->session()->invalidate();
+        $request->session()->invalidate();
      
-        // $request->session()->regenerateToken();
+        $request->session()->regenerateToken();
      
         return redirect('/');
     }
