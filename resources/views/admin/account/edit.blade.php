@@ -44,13 +44,13 @@
                         </label>
                     </div>
                 </div>
-                <div class="form-group">
+                {{-- <div class="form-group">
                     <label class="mb-2 block">Role</label>
                     <select name="role" class="border-2 border-gray-200 rounded-xl w-full py-2 px-4 text-gray-700 focus:outline-none focus:bg-white focus:border-primary mb-5">
                         <option value="worker" {{$worker->role == "worker" ? "selected" : ""}}>Worker</option>
                         <option value="admin" {{$worker->role == "admin" ? "selected" : ""}}>Admin</option>
                     </select>
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>
@@ -59,10 +59,11 @@
         <div class="container mx-auto">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
                 <div class="form-group">
-                    <label class="mb-2 block">Specialist</label>
-                    <select name="specialist" class="border-2 border-gray-200 rounded-xl w-full py-2 px-4 text-gray-700 focus:outline-none focus:bg-white focus:border-primary mb-5">
-                        @foreach ($categories as $category)
-                            <option value="{{$category->title}}">{{ucfirst($category->title)}}</option>
+                    <label class="mb-2 block">Treatment</label>
+                    <select name="treatment" class="border-2 border-gray-200 rounded-xl w-full py-2 px-4 text-gray-700 focus:outline-none focus:bg-white focus:border-primary mb-5">
+                        <option value="{{$worker->treatment->id}}">{{ucfirst($worker->treatment->name)}}</option>
+                        @foreach ($treatment as $treatment)
+                            <option value="{{$treatment->id}}">{{ucfirst($treatment->name)}}</option>
                         @endforeach
                     </select>
                 </div>

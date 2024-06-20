@@ -37,42 +37,14 @@
         </p>
 
         <div class="grid grid-cols-2 md:grid-cols-3 justify-center gap-2">
-            <div class="card w-full rounded-lg overflow-hidden relative">
-                <img src="{{asset('assets/img/haircut.jpg')}}" class="w-full" alt="Haircut">
-                <div class="absolute top-1 left-1 bg-white px-5 py-1 font-semibold rounded-lg">
-                    Haircut
+            @foreach ($treatments as $treatment)
+                <div class="card w-full overflow-hidden relative">
+                    <img src="{{asset('storage/'.$treatment->image)}}" class="w-72 rounded-lg" alt="Haircut">
+                    <div class="absolute top-1 left-1 bg-white px-5 py-1 font-semibold rounded-lg">
+                        {{ucfirst($treatment->name)}}
+                    </div>
                 </div>
-            </div>
-            <div class="card w-full rounded-lg overflow-hidden relative">
-                <img src="{{asset('assets/img/haircut.jpg')}}" class="w-full" alt="Haircut">
-                <div class="absolute top-1 left-1 bg-white px-5 py-1 font-semibold rounded-lg">
-                    Haircut
-                </div>
-            </div>
-            <div class="card w-full rounded-lg overflow-hidden relative">
-                <img src="{{asset('assets/img/haircut.jpg')}}" class="w-full" alt="Haircut">
-                <div class="absolute top-1 left-1 bg-white px-5 py-1 font-semibold rounded-lg">
-                    Haircut
-                </div>
-            </div>
-            <div class="card w-full rounded-lg overflow-hidden relative">
-                <img src="{{asset('assets/img/haircut.jpg')}}" class="w-full" alt="Haircut">
-                <div class="absolute top-1 left-1 bg-white px-5 py-1 font-semibold rounded-lg">
-                    Haircut
-                </div>
-            </div>
-            <div class="card w-full rounded-lg overflow-hidden relative">
-                <img src="{{asset('assets/img/haircut.jpg')}}" class="w-full" alt="Haircut">
-                <div class="absolute top-1 left-1 bg-white px-5 py-1 font-semibold rounded-lg">
-                    Haircut
-                </div>
-            </div>
-            <div class="card w-full rounded-lg overflow-hidden relative">
-                <img src="{{asset('assets/img/haircut.jpg')}}" class="w-full" alt="Haircut">
-                <div class="absolute top-1 left-1 bg-white px-5 py-1 font-semibold rounded-lg">
-                    Haircut
-                </div>
-            </div>
+            @endforeach
         </div>
     </div>
 </section>
@@ -82,59 +54,21 @@
     <div class="container">
         <h2 class="font-bold text-center text-4xl pb-3 text-white mb-5">Price List</h2>
         <div class="grid grid-cols-2 gap-3 text-white">
-            <div class="relative mb-2">
-                <div class="after:content-[''] after:block after:w-full after:h-1 after:bg-white after:mt-2 after:mb-3">
-                    <div class="flex justify-between">
-                        <div class="title text-base md:text-2xl">Haircut</div>
-                        <div class="price text-base md:text-2xl">120-150k</div>
+            @foreach ($price_list as $item)
+                <div class="relative mb-2">
+                    <div class="after:content-[''] after:block after:w-full after:h-1 after:bg-white after:mt-2 after:mb-3">
+                        <div class="flex justify-between">
+                            <div class="title text-base md:text-2xl">{{$item->name}}</div>
+                            <div class="price text-base md:text-2xl">{{$item->price}}</div>
+                        </div>
+                    </div>
+                    <div class="text-base">
+                        {{$item->desc}}
                     </div>
                 </div>
-                <div class="text-base">
-                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Amet deserunt eum, recusandae a
-                    architecto, rerum ad excepturi placeat iusto maiores voluptas saepe consequatur, magni ullam.
-                    Accusantium harum vitae alias repellendus?
-                </div>
-            </div>
-            <div class="relative mb-2">
-                <div class="after:content-[''] after:block after:w-full after:h-1 after:bg-white after:mt-2 after:mb-3">
-                    <div class="flex justify-between">
-                        <div class="title text-base md:text-2xl">Haircut</div>
-                        <div class="price text-base md:text-2xl">120-150k</div>
-                    </div>
-                </div>
-                <div class="text-base">
-                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Amet deserunt eum, recusandae a
-                    architecto, rerum ad excepturi placeat iusto maiores voluptas saepe consequatur, magni ullam.
-                    Accusantium harum vitae alias repellendus?
-                </div>
-            </div>
-            <div class="relative mb-2">
-                <div class="after:content-[''] after:block after:w-full after:h-1 after:bg-white after:mt-2 after:mb-3">
-                    <div class="flex justify-between">
-                        <div class="title text-base md:text-2xl">Haircut</div>
-                        <div class="price text-base md:text-2xl">120-150k</div>
-                    </div>
-                </div>
-                <div class="text-base">
-                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Amet deserunt eum, recusandae a
-                    architecto, rerum ad excepturi placeat iusto maiores voluptas saepe consequatur, magni ullam.
-                    Accusantium harum vitae alias repellendus?
-                </div>
-            </div>
-            <div class="relative mb-2">
-                <div class="after:content-[''] after:block after:w-full after:h-1 after:bg-white after:mt-2 after:mb-3">
-                    <div class="flex justify-between">
-                        <div class="title text-base md:text-2xl">Haircut</div>
-                        <div class="price text-base md:text-2xl">120-150k</div>
-                    </div>
-                </div>
-                <div class="text-base">
-                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Amet deserunt eum, recusandae a
-                    architecto, rerum ad excepturi placeat iusto maiores voluptas saepe consequatur, magni ullam.
-                    Accusantium harum vitae alias repellendus?
-                </div>
-            </div>
+            @endforeach
         </div>
+        {{ $price_list->links() }}
     </div>
 </section>
 
@@ -175,7 +109,7 @@
                                     <div
                                         class="card max-w-fit shadow-lg rounded-md overflow-hidden">
                                         <div class="card-image w-32 h-32 md:w-64 md:h-64">
-                                            <img src="{{asset('storage/'.$worker->worker->image)}}"  class="w-full h-full" alt="worker">
+                                            <img src="{{$worker->worker && $worker->worker->image != null ? asset('storage/'.$worker->worker->image) : asset('assets/img/no_image.png')}}"  class="w-full h-full" alt="worker">
                                         </div>
                                         <h3 class="text-black font-semibold p-3 text-center">{{$worker->name}}</h3>
                                     </div>
@@ -222,5 +156,15 @@
         // },
     });
 
+</script>
+<script>
+    // Pagination auto scroll
+    let page = document.querySelector('#pice-list');
+    let pagination = window.location.search;
+    const urlParams = new URLSearchParams(pagination);
+    if(urlParams.get('page')){
+        page.scrollIntoView({ behavior: "smooth" });
+    }
+    console.log(urlParams.get('page'))
 </script>
 @endpush

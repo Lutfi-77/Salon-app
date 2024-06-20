@@ -8,6 +8,8 @@ use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\AdminGalleryController;
 use App\Http\Controllers\Admin\AdminManageController;
 use App\Http\Controllers\Admin\AdminProfileController;
+use App\Http\Controllers\Admin\AdminTreatmentController;
+use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\AuthUserController;
 use App\Http\Controllers\CatalogueController;
 use App\Http\Controllers\GalleryController;
@@ -31,6 +33,9 @@ Route::middleware(['role:customer', 'profileCheck'])->prefix('user')->group(func
     Route::get('logout', [AuthUserController::class, 'logout'])->name('user.logout');
     Route::resource('profile', UserProfileController::class);
     Route::post('logout', [AuthUserController::class, 'logout'])->name('user.logout');
+
+    Route::get('appointment', [AppointmentController::class, 'index'])->name('user.appointment');
+    Route::get('appointment/getWorker/{id}', [AppointmentController::class, 'getWorker'])->name('user.getWorker');
 });
     
     
@@ -74,4 +79,11 @@ Route::middleware('role:admin')->prefix('admin')->group(function () {
     Route::get('catalogue/edit/{id}', [AdminCatalogueController::class, 'edit'])->name('admin.catalogue.edit');
     Route::post('catalogue/edit/{id}', [AdminCatalogueController::class, 'update'])->name('admin.catalogue.update');
     Route::delete('catalogue/delete/{id}', [AdminCatalogueController::class, 'destroy'])->name('admin.catalogue.destroy');
+    
+    Route::get('treatement', [AdminTreatmentController::class, 'index'])->name('admin.treatment.index');
+    Route::get('treatment/create', [AdminTreatmentController::class, 'create'])->name('admin.treatment.create');
+    Route::post('treatment/create', [AdminTreatmentController::class, 'store'])->name('admin.treatment.store');
+    Route::get('treatment/edit/{id}', [AdminTreatmentController::class, 'edit'])->name('admin.treatment.edit');
+    Route::post('treatment/edit/{id}', [AdminTreatmentController::class, 'update'])->name('admin.treatment.update');
+    Route::delete('treatment/delete/{id}', [AdminTreatmentController::class, 'destroy'])->name('admin.treatment.destroy');
 });

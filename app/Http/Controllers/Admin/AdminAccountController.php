@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Alert;
 use App\Models\Category;
+use App\Models\Treatment;
 use Illuminate\Support\Facades\Storage;
 
 class AdminAccountController extends Controller
@@ -31,8 +32,8 @@ class AdminAccountController extends Controller
      */
     public function create()
     {
-        $categories = Category::all();
-        return view('admin.account.create', compact('categories'));
+        $treatments = Treatment::all();
+        return view('admin.account.create', compact('treatments'));
     }
 
     /**
@@ -46,18 +47,23 @@ class AdminAccountController extends Controller
             'name' => 'required',
             'email' => 'required|unique:users,email',
             'password' => 'required|confirmed',
+            'phone' => 'required',
+            'address' => 'required',
+            'price' => 'required',
+            'treatment' => 'required',
+            'image' => 'mimes:jpg,bmp,png,jpeg,webp',
         ]);
 
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
-        $user->role = $request->role;
+        $user->role = 'worker';
         $user->save();
 
         $worker->phone = $request->phone;
         $worker->address = $request->address;
         $worker->price = $request->price;
-        $worker->specialist = $request->specialist;
+        $worker->treatment_id = $request->treatment;
         $worker->user_id = $user->id;
         if ($request->hasFile('image')){
             $picture = $request->file('image')->store('/worker_img');
@@ -83,8 +89,8 @@ class AdminAccountController extends Controller
     public function edit(string $id)
     {
         $worker = User::find($id);
-        $categories = Category::all();
-        return view('admin.account.edit', compact('worker', 'categories'));
+        $treatments = Treatment::all();
+        return view('admin.account.edit', compact('worker', 'treatments'));
     }
 
     /**
@@ -97,20 +103,25 @@ class AdminAccountController extends Controller
         $user = User::find($id);
         $validated = $request->validate([
             'name' => 'required',
-            'email' => 'required',
+            'email' => 'required|unique:users,email',
             'password' => 'confirmed',
+            'phone' => 'required',
+            'address' => 'required',
+            'price' => 'required',
+            'treatment' => 'required',
+            'image' => 'mimes:jpg,bmp,png,jpeg,webp',
         ]);
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = $request->password ? Hash::make($request->password) : $user->password;
-        $user->role = $request->role;
+        $user->role = 'worker';
 
         $user->worker()->updateOrCreate(["user_id" => $user->id], [
             "phone" => $request->phone,
             "address" => $request->address,
             "price" => $request->price,
             "image" => $request->hasFile('image') ? $request->file('image')->store('/worker_img') : $user->worker->image,
-            "specialist" => $request->specialist,
+            "treatment_id" => $request->treatment,
         ]);
         $user->save();
 
