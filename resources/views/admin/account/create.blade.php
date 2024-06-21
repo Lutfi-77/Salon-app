@@ -8,11 +8,11 @@
     <div class="mt-5 col-span-12 rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark xl:col-span-4 py-3">
         <div class="container mx-auto">
             @if ($errors->any())
-                <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
-                    @foreach ($errors->all() as $error)
-                    <span class="font-medium">{{ $error }}</span>
-                    @endforeach
-                </div>
+                @foreach ($errors->all() as $error)
+                    <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+                        <span class="font-medium">{{ $error }}</span>
+                    </div>
+                @endforeach
             @endif
             <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
                 <div class="form-group">

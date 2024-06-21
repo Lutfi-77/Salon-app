@@ -8,9 +8,17 @@
     @vite('resources/css/app.css')
 </head>
 <body>
+    @include('sweetalert::alert')
     <div class="container mx-auto">
         <h1 class="text-2xl mt-5">Make Your Appointment</h1>
-        <form action="{{route('admin.account.store')}}" method="POST" enctype="multipart/form-data">
+        @if ($errors->any())
+            @foreach ($errors->all() as $error)
+                <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+                    <span class="font-medium">{{ $error }}</span>
+                </div>
+            @endforeach
+        @endif
+        <form action="{{route('user.appointment.store')}}" method="POST">
             @csrf
             <div class="mt-5 col-span-12 rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark xl:col-span-4 py-3">
                 <div class="container mx-auto">
@@ -24,27 +32,9 @@
                             </select>
                         </div> --}}
                         <div class="form-group">
-                            <label class="mb-2 block">Phone</label>
-                            <input type="text" name="phone" class="appearance-none border-2 border-gray-200 rounded-xl w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-primary mb-5"
-                                required />
-                        </div>
-                        <div class="form-group">
-                            <label class="mb-2 block">Address</label>
-                            <textarea name="address" class="appearance-none border-2 border-gray-200 rounded-xl w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-primary mb-5"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label class="mb-2 block">Price</label>
-                            <input type="text" name="price" class="appearance-none border-2 border-gray-200 rounded-xl w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-primary mb-5"
-                                required />
-                        </div>
-                        <div class="form-group">
-                            <label class="mb-2 block">Image</label>
-                            <input type="file" name="image" class="appearance-none border-2 border-gray-200 rounded-xl w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-primary mb-5" />
-                        </div>
-                        <div class="form-group">
                             <label class="mb-2 block">Treatment</label>
                             <select name="treatment" id="treatment_option" onchange="reqWorker(this)" class="border-2 border-gray-200 rounded-xl w-full py-2 px-4 text-gray-700 focus:outline-none focus:bg-white focus:border-primary mb-5">
-                                <option value="null" selected>Pilih Treatment...</option>
+                                <option value="" selected>Pilih Treatment...</option>
                                 @foreach ($treatments as $treatment)
                                     <option value="{{$treatment->id}}">{{ucfirst($treatment->name)}}</option>
                                 @endforeach
@@ -58,11 +48,12 @@
                         </div>
                         <div class="form-group">
                             <label class="mb-2 block">Date</label>
-                            <input type="date" name="date" class="border-2 border-gray-200 rounded-xl w-full py-2 px-4 text-gray-700 focus:outline-none focus:bg-white focus:border-primary mb-5">
+                            <input type="date" min="{{date("Y-m-d")}}" name="date" class="border-2 border-gray-200 rounded-xl w-full py-2 px-4 text-gray-700 focus:outline-none focus:bg-white focus:border-primary mb-5">
                         </div>
                         <div class="form-group">
                             <label class="mb-2 block">Time</label>
-                            <input type="time" name="time" class="border-2 border-gray-200 rounded-xl w-full py-2 px-4 text-gray-700 focus:outline-none focus:bg-white focus:border-primary mb-5">
+                            <input type="time" id="appointment_time" name="time" min="07:00" max="21:00" class="border-2 border-gray-200 rounded-xl w-full py-2 px-4 text-gray-700 focus:outline-none focus:bg-white focus:border-primary">
+                            <small class="text-red-500">*Jam kerja dimulai jam 07:00 sampai 21:00</small>
                         </div>
                     </div>
                     <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg">
@@ -111,6 +102,18 @@
             }
             return 'Rp. ' + x1 + x2;
         }
+
+        function setCurrentTime() {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const currentTime = `${hours}:${minutes}`;
+            
+            const timeInput = document.getElementById('appointment_time');
+            timeInput.value = currentTime;
+        }
+        
+        setCurrentTime();
 
     </script>
 </body>
