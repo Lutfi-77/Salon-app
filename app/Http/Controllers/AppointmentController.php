@@ -17,13 +17,12 @@ class AppointmentController extends Controller
 
     public function getWorker($id_treatment)
     {
-        $worker = Worker::where('treatment_id', $id_treatment)->get();
+        $worker = Worker::where('treatment_id', $id_treatment)->with('user')->get();
     
         if ($worker) {
             return response()->json($worker);
-        } else {
-            return response()->json(['error' => 'Worker not found'], 404);
         }
+        return response()->json(['error' => 'Worker not found'], 404);
     }
 
 }

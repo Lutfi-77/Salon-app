@@ -43,11 +43,17 @@
                         </div>
                         <div class="form-group">
                             <label class="mb-2 block">Treatment</label>
-                            <select name="treatment" id="treatment_option" class="border-2 border-gray-200 rounded-xl w-full py-2 px-4 text-gray-700 focus:outline-none focus:bg-white focus:border-primary mb-5">
+                            <select name="treatment" id="treatment_option" onchange="reqWorker(this)" class="border-2 border-gray-200 rounded-xl w-full py-2 px-4 text-gray-700 focus:outline-none focus:bg-white focus:border-primary mb-5">
                                 <option value="null" selected>Pilih Treatment...</option>
                                 @foreach ($treatments as $treatment)
                                     <option value="{{$treatment->id}}">{{ucfirst($treatment->name)}}</option>
                                 @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="mb-2 block">Worker</label>
+                            <select id="workerSelect" name="worker" onchange="reqWorker(this)" class="border-2 border-gray-200 rounded-xl w-full py-2 px-4 text-gray-700 focus:outline-none focus:bg-white focus:border-primary mb-5">
+                                
                             </select>
                         </div>
                     </div>
@@ -61,21 +67,53 @@
 
     <script>
         const treatment = document.querySelector('#treatment_option');
-        treatment.addEventListener('change', function () {
-            let value = treatment.options[treatment.selectedIndex].value;
-            const url = `{{ url('appointment/getWorker') }}/${encodeURIComponent(value)}`;
-            const xhr = new XMLHttpRequest();
-            xhr.open("GET", "", true);
-            xhr.onreadystatechange = function()
-            {
-                if(xhr.readyState == 4 && xhr.status == 200) {
-                    console.log(xhr.responseText);
-                }
-            }
-            xhr.send();
+        // treatment.addEventListener('change', function () {
+        //     let value = treatment.options[treatment.selectedIndex].value;
+        //     const url = `{{ url('user/appointment/getWorker') }}/${encodeURIComponent(value)}`;
+        //     let result = fetch(url).then(response => response.json())
+        //     console.log(result)
+        //     // fetch(url)
+        //     // .then(
+        //     //     response => console.log(response.json()) // .json(), .blob(), etc.
+        //     // ).then(
+        //     //     text => console.log(text) // Handle here
+        //     // );
 
-            // console.log(treatment.options[treatment.selectedIndex].value);
-        })
+        //     // console.log(treatment.options[treatment.selectedIndex].value);
+        // })
+        async function reqWorker(e){
+            const url = `{{ url('user/appointment/getWorker') }}/${encodeURIComponent(e.value)}`;
+            let result = await fetch(url).then(response => response.json())
+            // console.log(result)
+            createOption(result)
+        }
+
+        function createOption(data) {
+            const select = document.querySelector('#workerSelect')
+            data.forEach(worker => {
+                console.log(worker)
+                var opt = document.createElement('option');
+                opt.value = worker.id;
+                opt.innerHTML = worker.user.name+" - "+format_rupiah(worker.price);
+                select.appendChild(opt);
+            });
+        }
+
+        function format_rupiah(nStr) {
+		if (nStr === null) {
+			return 'Rp. 0';
+		}
+		nStr += '';
+		x = nStr.split(',');
+		x1 = x[0];
+		x2 = x.length > 1 ? ',' + x[1] : '';
+		var rgx = /(\d+)(\d{3})/;
+		while (rgx.test(x1)) {
+			x1 = x1.replace(rgx, '$1' + ',' + '$2');
+		}
+		return 'Rp. ' + x1 + x2;
+}
+
     </script>
 </body>
 </html>
