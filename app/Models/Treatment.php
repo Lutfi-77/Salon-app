@@ -13,4 +13,10 @@ class Treatment extends Model
     {
         return $this->hasMany(Worker::class);
     }
+
+    public function appointment()
+    {
+        return $this->hasMany(Appointment::class);
+    }
+
 }

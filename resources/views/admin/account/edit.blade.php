@@ -61,8 +61,8 @@
                 <div class="form-group">
                     <label class="mb-2 block">Treatment</label>
                     <select name="treatment" class="border-2 border-gray-200 rounded-xl w-full py-2 px-4 text-gray-700 focus:outline-none focus:bg-white focus:border-primary mb-5">
-                        <option value="{{$worker->treatment->id}}">{{ucfirst($worker->treatment->name)}}</option>
-                        @foreach ($treatment as $treatment)
+                        <option value="{{$worker->worker->treatment->id}}">{{ucfirst($worker->worker->treatment->name)}}</option>
+                        @foreach ($treatments as $treatment)
                             <option value="{{$treatment->id}}">{{ucfirst($treatment->name)}}</option>
                         @endforeach
                     </select>

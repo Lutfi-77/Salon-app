@@ -40,7 +40,7 @@ class AppointmentController extends Controller
         $appointment->treatment = $treatmentName->name;
         $appointment->date = $request->date;
         $appointment->time = $request->time;
-        $appointment->approve = '0';
+        $appointment->status = 'Menunggu';
         
         $save = $appointment->save();
         if($save){
@@ -51,7 +51,7 @@ class AppointmentController extends Controller
         return redirect()->back();
     }
 
-    public function getWorker($id_treatment)
+    public function getWorker($id_treatment = null)
     {
         $worker = Worker::where('treatment_id', $id_treatment)->with('user')->get();
     

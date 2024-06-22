@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('treatment');
             $table->string('date');
             $table->string('time');
-            $table->enum('approve', [0, 1])->default(0);
+            $table->enum('status', ['Menunggu', 'Diterima', 'Selesai'])->default('Menunggu');
             $table->timestamps();
         });
     }

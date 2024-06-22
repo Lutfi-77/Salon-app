@@ -42,7 +42,7 @@
                         </div>
                         <div class="form-group">
                             <label class="mb-2 block">Worker</label>
-                            <select id="workerSelect" name="worker" onchange="reqWorker(this)" class="border-2 border-gray-200 rounded-xl w-full py-2 px-4 text-gray-700 focus:outline-none focus:bg-white focus:border-primary mb-5">
+                            <select id="workerSelect" name="worker" class="border-2 border-gray-200 rounded-xl w-full py-2 px-4 text-gray-700 focus:outline-none focus:bg-white focus:border-primary mb-5">
                                 
                             </select>
                         </div>
@@ -77,6 +77,7 @@
             const select = document.querySelector('#workerSelect');
             select.innerHTML = '';
             if (data.length == 0) {
+                select.innerHTML = '';
                 return;
             }
             data.forEach(worker => {

@@ -25,7 +25,7 @@
                     <td>{{$treatment->desc}}</td>
                     <td>{{$treatment->price}}</td>
                     <td>
-                        <img src="{{asset('storage/'.$treatment->image)}}" alt="thumb" class="w-28">
+                        <img src="{{$treatment->image ? asset('storage/'.$treatment->image) : asset('assets/img/no_image.png')}}" alt="thumb" class="w-28">
                     </td>
                     <td>
                         <div class="flex gap-3 flex-col text-center">

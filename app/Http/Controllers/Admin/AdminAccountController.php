@@ -90,6 +90,7 @@ class AdminAccountController extends Controller
     {
         $worker = User::find($id);
         $treatments = Treatment::all();
+        // dd($worker->worker->treatment);
         return view('admin.account.edit', compact('worker', 'treatments'));
     }
 
