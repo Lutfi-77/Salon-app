@@ -27,7 +27,7 @@ Route::post('/login', [AuthUserController::class, 'authenticate'])->name('user.a
 Route::get('/register', [AuthUserController::class, 'register'])->name('user.register');
 Route::post('/register', [AuthUserController::class, 'storeRegister'])->name('user.registerStore');
 
-// DASHBOARD USER
+// USER ROUTES
 Route::middleware(['role:customer', 'profileCheck'])->prefix('user')->group(function () {
     Route::get('dashboard', [UserDashboardController::class, 'index'])->name('user.dashboard');
     Route::get('logout', [AuthUserController::class, 'logout'])->name('user.logout');
@@ -89,4 +89,10 @@ Route::middleware('role:admin')->prefix('admin')->group(function () {
     Route::get('treatment/edit/{id}', [AdminTreatmentController::class, 'edit'])->name('admin.treatment.edit');
     Route::post('treatment/edit/{id}', [AdminTreatmentController::class, 'update'])->name('admin.treatment.update');
     Route::delete('treatment/delete/{id}', [AdminTreatmentController::class, 'destroy'])->name('admin.treatment.destroy');
+});
+
+
+// WORKER ROUTES
+Route::middleware(['role:customer', 'profileCheck'])->prefix('user')->group(function () {
+    
 });
