@@ -15,7 +15,7 @@ class AppointmentController extends Controller
     public function index()
     {
         $treatments = Treatment::all();
-        return view('appointment', compact('treatments'));
+        return view('users.appointment.appointment', compact('treatments'));
     }
 
     public function store(Request $request)
@@ -45,6 +45,31 @@ class AppointmentController extends Controller
         $save = $appointment->save();
         if($save){
             Alert::toast('Booking berhasil', 'success');
+            return redirect()->route('user.dashboard');
+        }
+        Alert::error('Booking Gagal', 'Terjadi kesalahan');
+        return redirect()->back();
+    }
+
+    public function edit($id)
+    {
+        $appointment = Appointment::find($id);
+        $treatments = Treatment::all();
+        return view('users.appointment.edit', compact('appointment', 'treatments'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $appointment = Appointment::find($id);
+        if(!$appointment){
+            Alert::error('Booking Gagal', 'Data tidak ditemukan');
+            return redirect()->back();
+        }
+        $appointment->date = $request->date;
+        $appointment->time = $request->time;
+        $save = $appointment->save();
+        if($save){
+            Alert::toast('Reschedule berhasil', 'success');
             return redirect()->route('user.dashboard');
         }
         Alert::error('Booking Gagal', 'Terjadi kesalahan');

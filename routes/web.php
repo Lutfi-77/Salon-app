@@ -36,6 +36,8 @@ Route::middleware(['role:customer', 'profileCheck'])->prefix('user')->group(func
 
     Route::get('appointment', [AppointmentController::class, 'index'])->name('user.appointment');
     Route::post('appointment/store', [AppointmentController::class, 'store'])->name('user.appointment.store');
+    Route::get('appointment/edit/{id}', [AppointmentController::class, 'edit'])->name('user.appointment.edit');
+    Route::post('appointment/edit/{id}', [AppointmentController::class, 'update'])->name('user.appointment.update');
     Route::get('appointment/getWorker/{id?}', [AppointmentController::class, 'getWorker'])->name('user.getWorker');
 });
     
