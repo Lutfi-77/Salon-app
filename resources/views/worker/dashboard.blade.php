@@ -1,4 +1,4 @@
-@extends('users.template.app')
+@extends('worker.template.app')
 
 @section('title', 'Dashboard')
 
@@ -177,13 +177,15 @@
                     <td>{{$appointment->time}}</td>
                     <td>{{$appointment->status}}</td>
                     <td>
-                        <div class="flex gap-3 flex-col text-center">
-                            <a href="{{route('admin.account.edit', $appointment->id)}}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg">
-                                Reschedule
-                            </a>
-                            <a href="{{ route('admin.account.destroy', $appointment->id) }}" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg" data-confirm-delete="true">
-                                Delete
-                            </a>
+                        <div class="flex gap-3">
+                            @if ($appointment->status != "Diterima")
+                                <a href="{{route('worker.changeStatus', ['id' => $appointment->id, 'status' => 'diterima'])}}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg">
+                                    Terima Pelanggan
+                                </a>
+                                <a href="{{ route('worker.changeStatus', ['id' => $appointment->id, 'status' => 'selesai']) }}" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg">
+                                    Selesai
+                                </a>
+                            @endif
                         </div>
                     </td>
                 </tr>

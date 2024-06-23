@@ -179,7 +179,7 @@
               </a>
             </li>
           </ul>
-          <form action="{{route('user.logout')}}" method="POST">
+          <form action="{{route('worker.logout')}}" method="POST">
             @csrf
             <button
             class="flex items-center gap-3.5 px-6 py-4 text-sm font-medium duration-300 ease-in-out hover:text-primary lg:text-base"

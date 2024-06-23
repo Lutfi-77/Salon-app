@@ -69,7 +69,7 @@
         async function reqWorker(e){
             const url = `{{ url('user/appointment/getWorker') }}/${encodeURIComponent(e.value)}`;
             let result = await fetch(url).then(response => response.json())
-            // console.log(result)
+            console.log(result)
             createOption(result)
         }
 

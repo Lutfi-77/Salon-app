@@ -1,30 +1,35 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Worker;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class AdminAuthController extends Controller
+class WorkerAuthController extends Controller
 {
-    
-    public function login()
+    public function index()
     {
-        return view('admin/login');
+        return view('worker.login');
     }
 
     public function authenticate(Request $request)
     {
-        $credentials = $request->validate([
+        $validate = $request->validate([
             'email' => ['required', 'email'],
             'password' => ['required'],
         ]);
- 
+
+        $credentials = [
+            'email' => $request->email,
+            'password' => $request->password,
+            'role' => 'worker',
+        ];
+        
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
  
-            return redirect()->route('admin.dashboard');
+            return redirect()->route('worker.dashboard');
         }
  
         return back()->withErrors([
@@ -42,5 +47,5 @@ class AdminAuthController extends Controller
      
         return redirect('/');
     }
-
+    
 }

@@ -18,6 +18,7 @@ class RoleCheck
     public function handle(Request $request, Closure $next, $role): Response
     {
         $user = Auth::user();
+        // dd(Auth::check() && Auth::user()->role == $role);
         if (Auth::check() && Auth::user()->role == $role) {
             return $next($request);
         }

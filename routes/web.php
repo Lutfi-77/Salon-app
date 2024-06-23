@@ -16,6 +16,8 @@ use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\User\UserDashboardController;
 use App\Http\Controllers\User\UserProfileController;
+use App\Http\Controllers\Worker\WorkerAuthController;
+use App\Http\Controllers\Worker\WorkerDashboardController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -49,6 +51,7 @@ Route::middleware('role:admin')->prefix('admin')->group(function () {
     Route::get('dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
     Route::get('profile', [AdminProfileController::class, 'index'])->name('admin.profile');
     Route::post('profile/edit', [AdminProfileController::class, 'editProfile'])->name('admin.profile.edit');
+    Route::post('/logout', [AdminAuthController::class, 'logout'])->name('admin.logout');
 
     Route::get('gallery', [AdminGalleryController::class, 'index'])->name('admin.gallery');
     Route::get('gallery/create', [AdminGalleryController::class, 'create'])->name('admin.gallery.create');
@@ -93,6 +96,11 @@ Route::middleware('role:admin')->prefix('admin')->group(function () {
 
 
 // WORKER ROUTES
-Route::middleware(['role:customer', 'profileCheck'])->prefix('user')->group(function () {
-    
+Route::get('worker/login', [WorkerAuthController::class, 'index'])->name('worker.login.index');
+Route::post('worker/login', [WorkerAuthController::class, 'authenticate'])->name('worker.authenticate');
+
+Route::middleware(['role:worker'])->prefix('worker')->group(function () {
+    Route::post('/logout', [WorkerAuthController::class, 'logout'])->name('worker.logout');
+    Route::get('/dashboard', [WorkerDashboardController::class, 'index'])->name('worker.dashboard');
+    Route::get('/dashboard/status/{id}/change/{status}', [WorkerDashboardController::class, 'changeStatus'])->name('worker.changeStatus');
 });

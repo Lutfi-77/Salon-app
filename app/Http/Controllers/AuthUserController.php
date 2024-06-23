@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 Use Alert;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class AuthUserController extends Controller
 {
@@ -35,7 +36,7 @@ class AuthUserController extends Controller
         $user = new User;
         $user->name = $request->name;
         $user->email = $request->email;
-        $user->password = $request->password;
+        $user->password = Hash::make($request->password);
         $user->role = 'customer';
         $user->save();
 
