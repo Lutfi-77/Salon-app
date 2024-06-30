@@ -16,9 +16,9 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('treatment_id')->nullable()->constrained()->onDelete('set null');
             $table->foreignId('worker_id')->nullable()->constrained()->onDelete('set null');
-            $table->string('treatment');
-            $table->string('date');
-            $table->string('time');
+            $table->string('treatment', 50);
+            $table->string('date', 20);
+            $table->string('time', 20);
             $table->enum('status', ['Menunggu', 'Diterima', 'Selesai'])->default('Menunggu');
             $table->timestamps();
         });

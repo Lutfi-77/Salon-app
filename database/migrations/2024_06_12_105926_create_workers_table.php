@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('workers', function (Blueprint $table) {
             $table->id();
-            $table->string('phone');
+            $table->string('phone', 25);
             $table->string('address');
-            $table->string('price');
+            $table->string('price', 20);
             // $table->string('specialist');
             $table->string('image')->nullable();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');

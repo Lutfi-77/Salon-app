@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('catalogues', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
+            $table->string('title', 20);
             $table->foreignId('category_id')->constrained()->onDelete('cascade');
             $table->string('image');
             $table->timestamps();

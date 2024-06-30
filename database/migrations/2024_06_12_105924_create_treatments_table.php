@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('treatments', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name', 50);
             $table->string('desc');
-            $table->string('price');
+            $table->string('price', 20);
             $table->string('image');
             $table->timestamps();
         });
