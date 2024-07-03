@@ -34,7 +34,7 @@ Route::middleware(['role:customer', 'profileCheck'])->prefix('user')->group(func
     Route::get('dashboard', [UserDashboardController::class, 'index'])->name('user.dashboard');
     Route::get('logout', [AuthUserController::class, 'logout'])->name('user.logout');
     Route::resource('profile', UserProfileController::class);
-    Route::post('logout', [AuthUserController::class, 'logout'])->name('user.logout');
+    // Route::post('logout', [AuthUserController::class, 'logout'])->name('user.logout');
 
     Route::get('appointment', [AppointmentController::class, 'index'])->name('user.appointment');
     Route::post('appointment/store', [AppointmentController::class, 'store'])->name('user.appointment.store');

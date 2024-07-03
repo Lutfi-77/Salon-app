@@ -39,7 +39,7 @@
         <div class="grid grid-cols-2 md:grid-cols-3 justify-center gap-2">
             @foreach ($treatments as $treatment)
                 <div class="card w-full overflow-hidden relative">
-                    <img src="{{asset('storage/'.$treatment->image)}}" class="w-72 rounded-lg" alt="Haircut">
+                    <img src="{{$treatment->image ? asset('storage/'.$treatment->image) : asset('assets/img/no_image.png')}}" class="w-72 rounded-lg" alt="Haircut">
                     <div class="absolute top-1 left-1 bg-white px-5 py-1 font-semibold rounded-lg">
                         {{ucfirst($treatment->name)}}
                     </div>
