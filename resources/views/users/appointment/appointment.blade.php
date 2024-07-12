@@ -36,15 +36,6 @@
                             
                         </select>
                     </div>
-                    <div class="form-group">
-                        <label class="mb-2 block">Date</label>
-                        <input type="date" min="{{date("Y-m-d")}}" name="date" class="border-2 border-gray-200 rounded-xl w-full py-2 px-4 text-gray-700 focus:outline-none focus:bg-white focus:border-primary mb-5">
-                    </div>
-                    <div class="form-group">
-                        <label class="mb-2 block">Time</label>
-                        <input type="time" id="appointment_time" name="time" min="07:00" max="21:00" class="border-2 border-gray-200 rounded-xl w-full py-2 px-4 text-gray-700 focus:outline-none focus:bg-white focus:border-primary">
-                        <small class="text-red-500">*Jam kerja dimulai jam 07:00 sampai 21:00</small>
-                    </div>
                 </div>
                 <button onclick="addTreatmentList()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg">
                     Tambah List
@@ -52,7 +43,26 @@
             </div>
 
             <div class="md:col-span-4 col-span-12 bg-white shadow-lg p-3">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iure neque quae rerum quas. Neque et iste tenetur sit maiores, in alias sed numquam quis temporibus consequatur, enim non? Commodi, temporibus.
+                <form action="{{route('user.appointment.store')}}" method="post">
+                    @csrf
+                    <div class="grid grid-cols-1">
+                        <div class="form-group">
+                            <label class="mb-2 block">Date</label>
+                            <input type="date" min="{{date("Y-m-d")}}" name="date" class="border-2 border-gray-200 rounded-xl w-full py-2 px-4 text-gray-700 focus:outline-none focus:bg-white focus:border-primary mb-5">
+                        </div>
+                        <div class="form-group">
+                            <label class="mb-2 block">Time</label>
+                            <input type="time" id="appointment_time" name="time" min="07:00" max="21:00" class="border-2 border-gray-200 rounded-xl w-full py-2 px-4 text-gray-700 focus:outline-none focus:bg-white focus:border-primary">
+                            <small class="text-red-500">*Jam kerja dimulai jam 07:00 sampai 21:00</small>
+                        </div>
+                    </div>
+                    <div class="text-group mt-5 flex justify-between mb-5 text-2xl">
+                        <h4>Total:</h4>
+                        <h5 class="font-bold">1200000</h5>
+                    </div>
+                    <div class="input-group grid grid-cols-2" id="inputGroup"></div>
+                    <button class="w-full bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg">Bayar</button>
+                </form>
             </div>
         </div>
 
@@ -189,9 +199,12 @@
         function addToTable(data) {
             let treatmentTable = document.querySelector('#treatmentTable');
             let tbody = document.querySelector('#tbody');
+            const inputGroup = document.querySelector('#inputGroup');
 
             tbody.innerHTML = "";
+            inputGroup.innerHTML = "";
             
+            let inputIndex = 0;
             data.forEach( (value, index) => {
                 let tr = document.createElement('tr');
 
@@ -218,6 +231,22 @@
                 tr.appendChild(td4);
 
                 tbody.appendChild(tr);
+
+                // create input
+                let treatment_id = document.createElement("input");
+                let worker_id = document.createElement("input");
+                treatment_id.setAttribute('type', 'text');
+                treatment_id.setAttribute('name', `treatment_id[${inputIndex}]`);
+                treatment_id.setAttribute("value", value.treatmentId);
+                
+                worker_id.setAttribute('type', 'text');
+                worker_id.setAttribute('name', `worker_id[${inputIndex}]`);
+                worker_id.setAttribute("value", value.workerId);
+                
+                inputGroup.append(treatment_id, worker_id);
+                inputIndex++;
+                // inputGroup.innerHTML = `<input type="text" name="treatment_id[${index}]" value="${value.treatmentId}">`;
+                // inputGroup.innerHTML = `<input type="text" name="worker_id[]">`;
             } )
         }
 
