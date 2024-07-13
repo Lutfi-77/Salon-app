@@ -236,14 +236,14 @@
                 let treatment_id = document.createElement("input");
                 let worker_id = document.createElement("input");
                 treatment_id.setAttribute('type', 'text');
-                treatment_id.setAttribute('name', `treatment_id[${inputIndex}]`);
-                treatment_id.setAttribute("value", value.treatmentId);
+                treatment_id.setAttribute('name', `appointment[${inputIndex}]`);
+                treatment_id.setAttribute("value", JSON.stringify({"treatmentId" : value.treatmentId, "workerId" : value.workerId}));
                 
-                worker_id.setAttribute('type', 'text');
-                worker_id.setAttribute('name', `worker_id[${inputIndex}]`);
-                worker_id.setAttribute("value", value.workerId);
+                // worker_id.setAttribute('type', 'text');
+                // worker_id.setAttribute('name', `worker_id[${inputIndex}]`);
+                // worker_id.setAttribute("value", value.workerId);
                 
-                inputGroup.append(treatment_id, worker_id);
+                inputGroup.append(treatment_id);
                 inputIndex++;
                 // inputGroup.innerHTML = `<input type="text" name="treatment_id[${index}]" value="${value.treatmentId}">`;
                 // inputGroup.innerHTML = `<input type="text" name="worker_id[]">`;
