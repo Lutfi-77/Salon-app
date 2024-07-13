@@ -1,3 +1,6 @@
+@php
+    $times = ["09:00", "11:00", "13:00", "15:00", "17:00", "19:00", "21:00"];
+@endphp
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,8 +36,9 @@
                     <div class="form-group">
                         <label class="mb-2 block">Worker</label>
                         <select id="workerSelect" name="worker" class="border-2 border-gray-200 rounded-xl w-full py-2 px-4 text-gray-700 focus:outline-none focus:bg-white focus:border-primary mb-5">
-                            
+                            <option value="" selected>Pilih Worker...</option>
                         </select>
+                        <input type="hidden" id="price">
                     </div>
                 </div>
                 <button onclick="addTreatmentList()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg">
@@ -52,13 +56,23 @@
                         </div>
                         <div class="form-group">
                             <label class="mb-2 block">Time</label>
-                            <input type="time" id="appointment_time" name="time" min="07:00" max="21:00" class="border-2 border-gray-200 rounded-xl w-full py-2 px-4 text-gray-700 focus:outline-none focus:bg-white focus:border-primary">
-                            <small class="text-red-500">*Jam kerja dimulai jam 07:00 sampai 21:00</small>
+                            {{-- <input type="time" id="appointment_time" name="time" min="07:00" max="21:00" class="border-2 border-gray-200 rounded-xl w-full py-2 px-4 text-gray-700 focus:outline-none focus:bg-white focus:border-primary">
+                            <small class="text-red-500">*Jam kerja dimulai jam 07:00 sampai 21:00</small> --}}
+                            <div class="grid md:grid-cols-4 grid-cols-2 gap-2">
+                                @foreach ($times as $key => $time)
+                                <div class="time-group">
+                                    <input type="radio" id="time-{{$key}}" name="time" value="{{$time}}" class="hidden peer" required />
+                                    <label for="time-{{$key}}" class="inline-flex items-center justify-center w-full py-3 px-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer peer-checked:border-blue-600 peer-checked:text-blue-600 peer-checked:bg-blue-600 peer-checked:text-white hover:text-gray-600 hover:bg-gray-100">                           
+                                        {{$time}}
+                                    </label>
+                                </div>
+                                @endforeach
+                            </div>
                         </div>
                     </div>
-                    <div class="text-group mt-5 flex justify-between mb-5 text-2xl">
-                        <h4>Total:</h4>
-                        <h5 class="font-bold">1200000</h5>
+                    <div class="text-group mt-5 flex justify-between flex-col md:flex-row mb-5 text-2xl">
+                        <h4 class="mb-3">Total:</h4>
+                        <h5 class="font-bold mb-3" id="total_price">Rp. 0</h5>
                     </div>
                     <div class="input-group grid grid-cols-2" id="inputGroup"></div>
                     <button class="w-full bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg">Bayar</button>
@@ -116,28 +130,7 @@
     </div>
 
     <script>
-        async function reqWorker(e){
-            const url = `{{ url('user/appointment/getWorker') }}/${encodeURIComponent(e.value)}`;
-            let result = await fetch(url).then(response => response.json())
-            // console.log(result)
-            createOption(result)
-        }
-
-        function createOption(data) {
-            const select = document.querySelector('#workerSelect');
-            select.innerHTML = '';
-            if (data.length == 0) {
-                select.innerHTML = '';
-                return;
-            }
-            data.forEach(worker => {
-                // console.log(worker)
-                let opt = document.createElement('option');
-                opt.value = worker.id;
-                opt.innerHTML = worker.user.name+" - "+format_rupiah(worker.price);
-                select.appendChild(opt);
-            });
-        }
+        const priceTreatment = document.querySelector('#price');
 
         function format_rupiah(nStr) {
             if (nStr === null) {
@@ -154,17 +147,43 @@
             return 'Rp. ' + x1 + x2;
         }
 
-        function setCurrentTime() {
-            const now = new Date();
-            const hours = String(now.getHours()).padStart(2, '0');
-            const minutes = String(now.getMinutes()).padStart(2, '0');
-            const currentTime = `${hours}:${minutes}`;
-            
-            const timeInput = document.getElementById('appointment_time');
-            timeInput.value = currentTime;
+        async function reqWorker(e){
+            const url = `{{ url('user/appointment/getWorker') }}/${encodeURIComponent(e.value)}`;
+            let result = await fetch(url).then(response => response.json())
+            // console.log(result)
+            priceTreatment.value = "";
+            createOption(result)
         }
-        
-        setCurrentTime();
+
+        function createOption(data) {
+            const select = document.querySelector('#workerSelect');
+            select.innerHTML = '<option value="" selected>Pilih Worker...</option>';
+            if (data.length == 0) {
+                select.innerHTML = '';
+                return;
+            }
+
+            data.forEach(worker => {
+                // console.log(worker)
+                let opt = document.createElement('option');
+                opt.setAttribute('data-price', worker.price);
+                opt.value = worker.id;
+                opt.innerHTML = worker.user.name+" - "+format_rupiah(worker.price);
+                select.appendChild(opt);
+            });
+
+            select.addEventListener('change', displayWorkerPrice);
+        }
+
+        function displayWorkerPrice() {
+            const select = document.querySelector('#workerSelect');
+
+            const selectedOption = select.options[select.selectedIndex];
+            const price = selectedOption.getAttribute('data-price');
+            priceTreatment.value = price;
+            // You can display the price in an element on the page if needed
+        }
+
 
         let treatmentList = [];
 
@@ -172,12 +191,18 @@
             const treatment = document.querySelector('#treatment_option');
             const workerSelect = document.querySelector('#workerSelect');
 
+            if(treatment.value == "" || workerSelect.value == ""){
+                alert("silahkan pilih treatment dan worker yang tersedia");
+                return;
+            }
+
             let objectTreatment = {
                 id: Date.now(),
                 treatmentId: treatment.value,
                 treatmentName: treatment.options[treatment.selectedIndex].text,
                 workerId: workerSelect.value,
                 workerName: workerSelect.options[workerSelect.selectedIndex].text,
+                price: parseInt(priceTreatment.value),
             }
             
             let index = treatmentList.find((item) => item.treatmentId === treatment.value && item.workerId === workerSelect.value);
@@ -222,7 +247,7 @@
 
                 td1.innerText = value.treatmentName;
                 td2.innerText = value.workerName;
-                td3.innerText = 10000;
+                td3.innerText = format_rupiah(value.price);
                 // td4.innerText = 10000;
 
                 tr.appendChild(td1);
@@ -236,30 +261,36 @@
                 let treatment_id = document.createElement("input");
                 let worker_id = document.createElement("input");
                 treatment_id.setAttribute('type', 'text');
+                // treatment_id.setAttribute('name', `appointment[${inputIndex}]`);
                 treatment_id.setAttribute('name', `appointment[${inputIndex}]`);
                 treatment_id.setAttribute("value", JSON.stringify({"treatmentId" : value.treatmentId, "workerId" : value.workerId}));
                 
-                // worker_id.setAttribute('type', 'text');
-                // worker_id.setAttribute('name', `worker_id[${inputIndex}]`);
-                // worker_id.setAttribute("value", value.workerId);
-                
                 inputGroup.append(treatment_id);
                 inputIndex++;
-                // inputGroup.innerHTML = `<input type="text" name="treatment_id[${index}]" value="${value.treatmentId}">`;
-                // inputGroup.innerHTML = `<input type="text" name="worker_id[]">`;
+
+                // Get total price
+                document.querySelector('#total_price').innerText = format_rupiah(data.reduce((sum, treatment) => sum + treatment.price, 0));
             } )
         }
-
-        // const hapus = document.getElementById("#hapusRow");
-        // hapus.addEventListener("click", function(){
-        //     console.log(hapus.getAttribute('data-treatmentId'));
-        // })
+        
         function hapusRow(e){
             const idList = e.getAttribute('data-treatmentId').toString();
             let newTreatmentList = treatmentList.filter(item => item.id.toString() !== idList);
             treatmentList = newTreatmentList;
             addToTable(treatmentList);
         }
+
+        // function setCurrentTime() {
+        //     const now = new Date();
+        //     const hours = String(now.getHours()).padStart(2, '0');
+        //     const minutes = String(now.getMinutes()).padStart(2, '0');
+        //     const currentTime = `${hours}:${minutes}`;
+            
+        //     const timeInput = document.getElementById('appointment_time');
+        //     timeInput.value = currentTime;
+        // }
+        
+        // setCurrentTime();
 
     </script>
 </body>

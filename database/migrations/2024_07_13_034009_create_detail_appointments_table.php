@@ -16,11 +16,12 @@ return new class extends Migration
             $table->foreignId('appointment_id')->constrained()->onDelete('cascade');
             $table->foreignId('treatment_id')->nullable()->constrained()->onDelete('set null');
             $table->foreignId('worker_id')->nullable()->constrained()->onDelete('set null');
-            // $table->string('date', 20);
-            // $table->string('time', 20);
+            $table->string('date', 20);
+            $table->string('time', 20);
             $table->string('treatment', 50);
             $table->string('worker', 50);
             $table->string('price', 20);
+            $table->enum('status_worker', ['Menunggu', 'Diterima', 'Batal', 'Selesai'])->default('Menunggu');
             $table->timestamps();
         });
     }
