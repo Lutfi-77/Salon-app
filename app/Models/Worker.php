@@ -14,8 +14,8 @@ class Worker extends Model
         'address',
         'price',
         'image',
-        'specialist',
-        'user_id'
+        'user_id',
+        'treatment_id',
     ];
 
     public function user()

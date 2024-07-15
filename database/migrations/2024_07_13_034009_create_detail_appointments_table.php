@@ -16,8 +16,8 @@ return new class extends Migration
             $table->foreignId('appointment_id')->constrained()->onDelete('cascade');
             $table->foreignId('treatment_id')->nullable()->constrained()->onDelete('set null');
             $table->foreignId('worker_id')->nullable()->constrained()->onDelete('set null');
-            $table->string('date', 20);
-            $table->string('time', 20);
+            $table->string('reschedule_date', 20)->nullable();
+            $table->string('reschedule_time', 20)->nullable();
             $table->string('treatment', 50);
             $table->string('worker', 50);
             $table->string('price', 20);

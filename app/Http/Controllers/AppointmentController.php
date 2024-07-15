@@ -22,6 +22,11 @@ class AppointmentController extends Controller
 
     public function store(Request $request)
     {
+        // dd($request->all());
+        $userLogedIn = Auth::user();
+        // dd($userLogedIn);
+        $appointment = new Appointment;
+
         // Validasi request
         $validated = $request->validate([
             'appointment' => 'required',
@@ -29,32 +34,46 @@ class AppointmentController extends Controller
             'time' => 'required',
         ]);
 
-        // dd($request->all());
         // mengolah data array
-        $appointments = Arr::map($request->appointment, function ($value, $key){
+        $appointment_details = Arr::map($request->appointment, function ($value, $key){
             return json_decode($value); //ubah menjadi object
         });
-        
-        // dd($appointment[0]);
 
-        $userLogedIn = Auth::user();
-        foreach ($appointments as $appointment) {
-            // dd($appointment);
-            $treatmentName = Treatment::find($appointment->treatmentId);
-            $workerName = Worker::find($appointment->workerId);
-            // dd($workerName);
-            
-            if(!$treatmentName || !$workerName){
-                Alert::error('Booking Gagal', 'Treatment yang dipilih tidak terdaftar');
+        $appointment->user_id = $userLogedIn->id;
+        $appointment->appointment_date = $request->date;
+        $appointment->appointment_time = $request->time;
+        
+        if ($appointment->save()){
+            foreach ($appointment_details as $appointment_detail) {
+                $treatmentName = Treatment::find($appointment_detail->treatmentId);
+                $worker = Worker::find($appointment_detail->workerId);
+                
+                if(!$treatmentName || !$worker){
+                    Alert::error('Booking Gagal', 'Treatment yang dipilih tidak terdaftar');
+                    return redirect()->back();
+                }
+                
+                $detailAppointment = new DetailAppointment;
+                $detailAppointment->appointment_id = $appointment->id;
+                $detailAppointment->treatment_id = $appointment_detail->treatmentId;
+                $detailAppointment->worker_id = $appointment_detail->workerId;
+                $detailAppointment->treatment = $treatmentName->name;
+                $detailAppointment->worker = $worker->user->name;
+                $detailAppointment->price = $worker->price;
+                $savedDetailAppointment = $detailAppointment->save();
+
+                if($savedDetailAppointment){
+                    Alert::toast('Booking berhasil', 'success');
+                    return redirect()->route('user.dashboard');
+                }
+                Alert::error('Booking Gagal', 'Terjadi kesalahan');
                 return redirect()->back();
             }
-            
-            $detailAppointment = new DetailAppointment;
-            $detailAppointment->treatment_id = $appointment->treatmentId;
-            $detailAppointment->worker_id = $appointment->workerId;
-            $detailAppointment->treatment = $treatmentName->name;
-            $detailAppointment->worker = $workerName->user->name;
-        }        
+        }
+
+        Alert::error('Booking Gagal', 'Terjadi kesalahan');
+        return redirect()->back();
+               
         // // dd($treatmentName);
         // if(!$treatmentName){
         //     Alert::error('Booking Gagal', 'Treatment yang dipilih tidak terdaftar');

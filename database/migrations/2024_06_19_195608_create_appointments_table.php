@@ -14,8 +14,10 @@ return new class extends Migration
         Schema::create('appointments', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->string('appointment_date', 20);
+            $table->string('appointment_time', 20);
             // $table->string('total_price', 25);
-            $table->enum('status', ['Menunggu', 'Batal', 'Selesai'])->default('Menunggu');
+            $table->enum('status', ['Batal', 'Selesai'])->nullable();
             // $table->enum('status_customer', ['Belum Datang', 'Sudah Datang'])->default('Menunggu');
             $table->timestamps();
         });

@@ -126,7 +126,7 @@ class AdminAccountController extends Controller
         ]);
         $user->save();
 
-        Alert::toast('Data berhasil ditambahkan', 'success');
+        Alert::toast('Data berhasil diubah', 'success');
         return redirect()->route('admin.account.index');
     }
 
