@@ -62,7 +62,7 @@
                                 @foreach ($times as $key => $time)
                                 <div class="time-group">
                                     <input type="radio" id="time-{{$key}}" name="time" value="{{$time}}" class="hidden peer" required />
-                                    <label for="time-{{$key}}" class="inline-flex items-center justify-center w-full py-3 px-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer peer-checked:border-blue-600 peer-checked:text-blue-600 peer-checked:bg-blue-600 peer-checked:text-white hover:text-gray-600 hover:bg-gray-100">                           
+                                    <label for="time-{{$key}}" class="inline-flex items-center justify-center w-full py-3 px-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer peer-checked:border-blue-600 peer-checked:bg-blue-600 peer-checked:text-white hover:text-gray-600 hover:bg-gray-100">                           
                                         {{$time}}
                                     </label>
                                 </div>

@@ -157,7 +157,12 @@
 
 <div class="mt-5 col-span-12 rounded-sm border border-stroke bg-white py-6 shadow-default dark:border-strokedark dark:bg-boxdark xl:col-span-4">
     <div class="container mx-auto">
-        <table id="dataTable" class="display" style="width:100%">
+        <div class="grid grid-cols-2 md:grid-cols-4">
+            <div class="card shadow-[0.625rem_0.625rem_0.875rem_0_rgb(225,226,228),-0.5rem_-0.5rem_1.125rem_0_rgb(255,255,255)] rounded-lg p-3 bg-white">
+                Lorem ipsum dolor sit, amet consectetur
+            </div>
+        </div>
+        {{-- <table id="dataTable" class="display" style="width:100%">
             <thead>
                 <tr>
                     <th>Treatment</th>
@@ -199,13 +204,13 @@
                     <th>Action</th>
                 </tr>
             </tfoot>
-        </table>
+        </table> --}}
     </div>
 </div>
 @endsection
 
-@push('js')
+{{-- @push('js')
     <script>
         let table = new DataTable('#dataTable');
     </script>
-@endpush
+@endpush --}}
