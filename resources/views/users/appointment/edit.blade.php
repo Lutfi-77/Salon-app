@@ -1,3 +1,6 @@
+@php
+    $times = ["09:00", "11:00", "13:00", "15:00", "17:00", "19:00", "21:00"];
+@endphp
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -44,8 +47,14 @@
                         </div>
                         <div class="form-group">
                             <label class="mb-2 block">Time</label>
-                            <input type="time" id="appointment_time" value="{{$appointment->time}}" name="time" min="07:00" max="21:00" class="border-2 border-gray-200 rounded-xl w-full py-2 px-4 text-gray-700 focus:outline-none focus:bg-white focus:border-primary">
-                            <small class="text-red-500">*Jam kerja dimulai jam 07:00 sampai 21:00</small>
+                            @foreach ($times as $key => $time)
+                                <div class="time-group py-2">
+                                    <input type="radio" id="time-{{$key}}" name="time" value="{{$time}}" class="hidden peer" required />
+                                    <label for="time-{{$key}}" class="inline-flex items-center justify-center w-full py-3 px-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer peer-checked:border-blue-600 peer-checked:bg-blue-600 peer-checked:text-white hover:text-gray-600 hover:bg-gray-100">                           
+                                        {{$time}}
+                                    </label>
+                                </div>
+                            @endforeach
                         </div>
                     </div>
                     <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg">

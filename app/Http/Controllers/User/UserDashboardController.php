@@ -14,7 +14,8 @@ class UserDashboardController extends Controller
     {
         $userLogedIn = Auth::user();
         $appointments = Appointment::where('user_id', $userLogedIn->id)->get();
-        return view('users.dashboard', compact('appointments'));
+        // dd($appointments[0]->detail->where('reschedule_time', '!=', null))->count();
+        return view('users.dashboard', compact('appointments', 'userLogedIn'));
     }
 
 }

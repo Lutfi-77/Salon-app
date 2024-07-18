@@ -22,9 +22,7 @@ class AppointmentController extends Controller
 
     public function store(Request $request)
     {
-        // dd($request->all());
         $userLogedIn = Auth::user();
-        // dd($userLogedIn);
         $appointment = new Appointment;
 
         // Validasi request
@@ -62,13 +60,13 @@ class AppointmentController extends Controller
                 $detailAppointment->price = $worker->price;
                 $savedDetailAppointment = $detailAppointment->save();
 
-                if($savedDetailAppointment){
-                    Alert::toast('Booking berhasil', 'success');
-                    return redirect()->route('user.dashboard');
-                }
-                Alert::error('Booking Gagal', 'Terjadi kesalahan');
-                return redirect()->back();
             }
+            if($savedDetailAppointment){
+                Alert::toast('Booking berhasil', 'success');
+                return redirect()->route('user.dashboard');
+            }
+            Alert::error('Booking Gagal', 'Terjadi kesalahan');
+            return redirect()->back();
         }
 
         Alert::error('Booking Gagal', 'Terjadi kesalahan');
@@ -99,27 +97,56 @@ class AppointmentController extends Controller
 
     public function edit($id)
     {
-        $appointment = Appointment::find($id);
-        $treatments = Treatment::all();
-        return view('users.appointment.edit', compact('appointment', 'treatments'));
+        $appointment = DetailAppointment::find($id);
+        // $treatments = Treatment::all();
+        return view('users.appointment.edit', compact('appointment'));
     }
 
     public function update(Request $request, $id)
     {
-        $appointment = Appointment::find($id);
-        if(!$appointment){
-            Alert::error('Booking Gagal', 'Data tidak ditemukan');
-            return redirect()->back();
-        }
-        $appointment->date = $request->date;
-        $appointment->time = $request->time;
-        $save = $appointment->save();
-        if($save){
-            Alert::toast('Reschedule berhasil', 'success');
+        $detailAppointment = DetailAppointment::find($id);
+        $validated = $request->validate([
+            'date' => 'required',
+            'time' => 'required',
+        ]);
+        $detailAppointment->reschedule_date = $request->date;
+        $detailAppointment->reschedule_time = $request->time;
+        $savedDetailAppointment = $detailAppointment->save();
+        if($savedDetailAppointment){
+            Alert::toast('Reschedule Berhasil', 'success');
             return redirect()->route('user.dashboard');
         }
-        Alert::error('Booking Gagal', 'Terjadi kesalahan');
+        Alert::toast('Reschedule Gagal', 'error');
         return redirect()->back();
+        // $appointment = Appointment::find($id);
+        // if(!$appointment){
+        //     Alert::error('Booking Gagal', 'Data tidak ditemukan');
+        //     return redirect()->back();
+        // }
+        // $appointment->date = $request->date;
+        // $appointment->time = $request->time;
+        // $save = $appointment->save();
+        // if($save){
+        //     Alert::toast('Reschedule berhasil', 'success');
+        //     return redirect()->route('user.dashboard');
+        // }
+        // Alert::error('Booking Gagal', 'Terjadi kesalahan');
+        // return redirect()->back();
+    }
+
+    public function detail($id)
+    {
+        $detailAppointments = DetailAppointment::where('appointment_id', $id)->get();
+        return view('users.appointment.detail', compact('detailAppointments'));
+    }
+
+    public function cancel($id)
+    {
+        $detailAppointment = DetailAppointment::find($id);
+        $detailAppointment->status_worker = 'batal';
+        $detailAppointment->save();
+        Alert::toast('Treatment Dibatalkan', 'success');
+        return redirect()->route('user.dashboard');
     }
 
     public function getWorker($id_treatment = null)

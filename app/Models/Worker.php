@@ -33,4 +33,9 @@ class Worker extends Model
         return $this->hasMany(Appointment::class);
     }
     
+    public function detailAppointment()
+    {
+        return $this->hasMany(DetailAppointment::class, 'worker_id');
+    }
+    
 }

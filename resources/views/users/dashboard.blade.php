@@ -157,10 +157,31 @@
 
 <div class="mt-5 col-span-12 rounded-sm border border-stroke bg-white py-6 shadow-default dark:border-strokedark dark:bg-boxdark xl:col-span-4">
     <div class="container mx-auto">
-        <div class="grid grid-cols-2 md:grid-cols-4">
-            <div class="card shadow-[0.625rem_0.625rem_0.875rem_0_rgb(225,226,228),-0.5rem_-0.5rem_1.125rem_0_rgb(255,255,255)] rounded-lg p-3 bg-white">
-                Lorem ipsum dolor sit, amet consectetur
+        <div class="grid grid-cols-1 gap-5">
+            @foreach ($appointments as $appointment)
+            <div class="card w-full overflow-hidden shadow-[0.625rem_0.625rem_0.875rem_0_rgb(225,226,228),-0.5rem_-0.5rem_1.125rem_0_rgb(255,255,255)] rounded-lg bg-white">
+                <div class="p-3">
+                    <h3 class="text-md">{{$userLogedIn->name}}</h3>
+                    Treatment: {{$appointment->detail->count()}}
+                    <div class="flex justify-between">
+                        <div class="font-bold">Tanggal Booking</div>
+                        <div class="font-bold">{{$appointment->appointment_date}}</div>
+                    </div>
+                    <div class="flex justify-between">
+                        <div class="font-bold">Status Reschedule</div>
+                        <div class="font-bold">{{$appointment->detail->where('reschedule_time', '!=', null)->count();}} Treatment Reschedule</div>
+                    </div>
+                    <div class="flex justify-between">
+                        <div class="font-bold">Waktu Booking</div>
+                        <div class="font-bold">{{$appointment->appointment_time}}</div>
+                    </div>
+                </div>
+                {{-- <div class="grid grid-cols-1 md:grid-cols-2 w-full">
+                    <a href="#" class="bg-blue-700 w-full text-white text-center px-2 py-1">Reschedule</a>
+                </div> --}}
+                <a href="{{route('user.appointment.detail', $appointment->id)}}" class="block bg-green-700 w-full text-white text-center px-2 py-1">Detail</a>
             </div>
+            @endforeach
         </div>
         {{-- <table id="dataTable" class="display" style="width:100%">
             <thead>

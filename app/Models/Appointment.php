@@ -24,4 +24,9 @@ class Appointment extends Model
         return $this->belongsTo(Worker::class);
     }
 
+    public function detail()
+    {
+        return $this->hasMany(DetailAppointment::class);
+    }
+
 }

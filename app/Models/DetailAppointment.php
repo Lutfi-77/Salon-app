@@ -8,4 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class DetailAppointment extends Model
 {
     use HasFactory;
+
+    public function appointment()
+    {
+        return $this->belongsTo(Appointment::class);
+    }
+    
+    public function getWorker()
+    {
+        return $this->belongsTo(Worker::class, 'worker_id');
+    }
+
 }
