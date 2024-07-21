@@ -2,9 +2,10 @@
     $groupLink = [
         ['url' => route('admin.dashboard'), 'title' => 'Dashboard'],
         ['url' => route('admin.category.index'), 'title' => 'Category'],
-        ['url' => route('admin.gallery'), 'title' => 'Gallery'],
         ['url' => route('admin.catalogue.index'), 'title' => 'Catalogue'],
+        ['url' => route('admin.gallery'), 'title' => 'Gallery'],
         ['url' => route('admin.treatment.index'), 'title' => 'Treatment'],
+        ['url' => route('admin.transaction.index'), 'title' => 'Transaction'],
     ]
 @endphp
 

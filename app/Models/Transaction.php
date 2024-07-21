@@ -5,18 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Treatment extends Model
+class Transaction extends Model
 {
     use HasFactory;
 
-    public function worker()
+    public function user()
     {
-        return $this->hasMany(Worker::class);
+        return $this->belongsTo(User::class);
     }
 
     public function appointment()
     {
-        return $this->hasMany(DetailAppointment::class, 'treatment_id');
+        return $this->belongsTo(Appointment::class);
     }
-
 }

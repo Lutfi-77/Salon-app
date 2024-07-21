@@ -7,11 +7,18 @@ use Illuminate\Database\Eloquent\Model;
 
 class DetailAppointment extends Model
 {
+    // protected $primaryKey = 'id';
+
     use HasFactory;
 
     public function appointment()
     {
-        return $this->belongsTo(Appointment::class);
+        return $this->belongsTo(Appointment::class, 'appointment_id');
+    }
+
+    public function detailTreatment()
+    {
+        return $this->belongsTo(Treatment::class, 'treatment_id');
     }
     
     public function getWorker()

@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\AdminGalleryController;
 use App\Http\Controllers\Admin\AdminManageController;
 use App\Http\Controllers\Admin\AdminProfileController;
+use App\Http\Controllers\Admin\AdminTransactionController;
 use App\Http\Controllers\Admin\AdminTreatmentController;
 use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\AuthUserController;
@@ -95,6 +96,8 @@ Route::middleware('role:admin')->prefix('admin')->group(function () {
     Route::get('treatment/edit/{id}', [AdminTreatmentController::class, 'edit'])->name('admin.treatment.edit');
     Route::post('treatment/edit/{id}', [AdminTreatmentController::class, 'update'])->name('admin.treatment.update');
     Route::delete('treatment/delete/{id}', [AdminTreatmentController::class, 'destroy'])->name('admin.treatment.destroy');
+
+    Route::get('transaction', [AdminTransactionController::class, 'index'])->name('admin.transaction.index');
 });
 
 

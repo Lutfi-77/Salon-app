@@ -7,16 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Appointment extends Model
 {
+    // protected $primaryKey = 'id';
+
     use HasFactory;
 
     public function user()
     {
         return $this->belongsTo(User::class);
-    }
-
-    public function treatment()
-    {
-        return $this->belongsTo(Treatment::class);
     }
 
     public function worker()
@@ -26,7 +23,12 @@ class Appointment extends Model
 
     public function detail()
     {
-        return $this->hasMany(DetailAppointment::class);
+        return $this->hasMany(DetailAppointment::class, 'appointment_id');
+    }
+    
+    public function transaction()
+    {
+        return $this->hasOne(Transaction::class);
     }
 
 }

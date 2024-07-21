@@ -1,3 +1,19 @@
+@php
+    function getStatusClass($status) {
+        switch ($status) {
+            case 'Menunggu':
+                return 'bg-yellow-500 text-white';
+            case 'Diterima':
+                return 'bg-blue-500 text-white';
+            case 'Batal':
+                return 'bg-red-500 text-white';
+            case 'Selesai':
+                return 'bg-green-500 text-white';
+            default:
+                return '';
+        }
+    }
+@endphp
 @extends('worker.template.app')
 
 @section('title', 'Dashboard')
@@ -156,58 +172,61 @@
 </div>
 
 <div class="mt-5 col-span-12 rounded-sm border border-stroke bg-white py-6 shadow-default dark:border-strokedark dark:bg-boxdark xl:col-span-4">
-    <div class="container mx-auto">
-        <table id="dataTable" class="display" style="width:100%">
-            <thead>
-                <tr>
-                    <th>Treatment</th>
-                    <th>Worker</th>
-                    <th>Date</th>
-                    <th>Time</th>
-                    <th>Status</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($appointments as $appointment)
-                <tr>
-                    <td>{{$appointment->treatment}}</td>
-                    <td>{{$appointment->worker->user->name}}</td>
-                    <td>{{$appointment->date}}</td>
-                    <td>{{$appointment->time}}</td>
-                    <td>{{$appointment->status}}</td>
-                    <td>
-                        <div class="flex gap-3">
-                            @if ($appointment->status != "Diterima")
-                                <a href="{{route('worker.changeStatus', ['id' => $appointment->id, 'status' => 'diterima'])}}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg">
-                                    Terima Pelanggan
-                                </a>
-                                <a href="{{ route('worker.changeStatus', ['id' => $appointment->id, 'status' => 'selesai']) }}" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg">
-                                    Selesai
-                                </a>
-                            @endif
+    <div class="container mx-auto" id="test-list">
+        <input type="search" class="fuzzy-search border-2 border-gray-200 rounded-xl w-full py-2 px-4 text-gray-700 focus:outline-none focus:bg-white focus:border-primary mb-5" placeholder="Search...">
+        <div class="grid grid-cols-1 gap-5 list">
+            @foreach ($appointments as $appointment)
+            <div class="card w-full overflow-hidden shadow-[0.625rem_0.625rem_0.875rem_0_rgb(225,226,228),-0.5rem_-0.5rem_1.125rem_0_rgb(255,255,255)] rounded-lg bg-white">
+                <div class="p-3">
+                    <div class="flex justify-between">
+                        <div class="font-bold">Nama Customer</div>
+                        <div class="font-bold customer_name">{{$appointment->appointment->user->name}}</div>
+                    </div>
+                    <div class="flex justify-between">
+                        <div class="font-bold">Treatment</div>
+                        <div class="font-bold">{{$appointment->treatment}}</div>
+                    </div>
+                    <div class="flex justify-between">
+                        <div class="font-bold">Tanggal Booking</div>
+                        <div class="font-bold">{{$appointment->reschedule_date != null ? "$appointment->reschedule_date" : $appointment->appointment->appointment_date}}</div>
+                    </div>
+                    <div class="flex justify-between">
+                        <div class="font-bold">Status</div>
+                        <div class="font-bold px-2 py-1 rounded-lg text-white {{getStatusClass($appointment->status_worker)}}">
+                            {{$appointment->status_worker}}
                         </div>
-                    </td>
-                </tr>
-                @endforeach
-            </tbody>
-            <tfoot>
-                <tr>
-                    <th>Treatment</th>
-                    <th>Worker</th>
-                    <th>Date</th>
-                    <th>Time</th>
-                    <th>Status</th>
-                    <th>Action</th>
-                </tr>
-            </tfoot>
-        </table>
+                    </div>
+                    {{-- <div class="flex justify-between">
+                        <div class="font-bold">Status Reschedule</div>
+                        <div class="font-bold">{{$appointment->detail->where('reschedule_time', '!=', null)->count();}} Treatment Reschedule</div>
+                        <div class="font-bold">0 Treatment Reschedule</div>
+                    </div> --}}
+                    <div class="flex justify-between">
+                        <div class="font-bold">Waktu Booking</div>
+                        <div class="font-bold">{{$appointment->reschedule_time != null ? "$appointment->reschedule_time" : $appointment->appointment->appointment_time}}</div>
+                    </div>
+                </div>
+                <div class="grid grid-cols-3 w-full">
+                    <a href="{{route('worker.changeStatus', ['id' => $appointment->id, 'status'=> 'diterima'])}}" class="bg-blue-700 w-full text-white text-center px-2 py-1">Terima</a>
+                    <a href="{{route('worker.changeStatus', ['id' => $appointment->id, 'status'=> 'batal'])}}" class="block bg-red-700 w-full text-white text-center px-2 py-1">Batal</a>
+                    <a href="{{route('worker.changeStatus', ['id' => $appointment->id, 'status'=> 'selesai'])}}" class="bg-green-700 w-full text-white text-center px-2 py-1">Selesai</a>
+                </div>
+            </div>
+            @endforeach
+        </div>
     </div>
 </div>
 @endsection
 
 @push('js')
-    <script>
-        let table = new DataTable('#dataTable');
-    </script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js"></script>
+<script>
+    var monkeyList = new List('test-list', { 
+        valueNames: ['customer_name']
+    });
+</script>
+<script>
+    let table = new DataTable('#dataTable');
+</script>
 @endpush
