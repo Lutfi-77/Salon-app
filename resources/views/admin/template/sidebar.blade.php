@@ -5,6 +5,7 @@
         ['url' => route('admin.catalogue.index'), 'title' => 'Catalogue'],
         ['url' => route('admin.gallery'), 'title' => 'Gallery'],
         ['url' => route('admin.treatment.index'), 'title' => 'Treatment'],
+        ['url' => route('admin.appointment.index'), 'title' => 'Appointment'],
         ['url' => route('admin.transaction.index'), 'title' => 'Transaction'],
     ]
 @endphp

@@ -205,6 +205,14 @@
                         <div class="font-bold">Waktu Booking</div>
                         <div class="font-bold">{{$appointment->reschedule_time != null ? "$appointment->reschedule_time" : $appointment->appointment->appointment_time}}</div>
                     </div>
+                    <div class="flex justify-between items-center">
+                        <div class="font-bold">Hubungi Customer</div>
+                        <div class="font-bold">
+                            <a href="https://wa.me/{{$appointment->appointment->user->customer->phone}}">
+                                <img src="{{asset('assets/img/whatsapp.png')}}" alt="whatsapp" class="w-10">
+                            </a>
+                        </div>
+                    </div>
                 </div>
                 <div class="grid grid-cols-3 w-full">
                     <a href="{{route('worker.changeStatus', ['id' => $appointment->id, 'status'=> 'diterima'])}}" class="bg-blue-700 w-full text-white text-center px-2 py-1">Terima</a>

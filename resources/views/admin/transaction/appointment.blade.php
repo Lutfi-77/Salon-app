@@ -1,28 +1,13 @@
 @php
     function getStatusClass($status) {
         switch ($status) {
-            case 'belum terbayar':
+            case 'Batal':
                 return 'bg-red-500 text-white';
-            case 'sudah terbayar':
+            case 'Selesai':
                 return 'bg-green-500 text-white';
             default:
                 return '';
         }
-    }
-
-    function format_rupiah($str) {
-        if ($str === null) {
-            return 'Rp. 0';
-        }
-        $str = (string) $str;
-        $x = explode(',', $str);
-        $x1 = $x[0];
-        $x2 = count($x) > 1 ? ',' . $x[1] : '';
-        $rgx = '/(\d+)(\d{3})/';
-        while (preg_match($rgx, $x1)) {
-            $x1 = preg_replace($rgx, '$1' . ',' . '$2', $x1);
-        }
-        return 'Rp. ' . $x1 . $x2;
     }
 @endphp
 @extends('admin.template.app')
@@ -31,12 +16,12 @@
 
 @section('content')
 <div class="flex gap-3">
-    {{-- <a href="{{route('admin.appointment.index')}}" class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded-lg">
+    <a href="{{route('admin.appointment.index')}}" class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded-lg">
         Semua Appointment
     </a>
     <a href="{{route('admin.appointment.index', 'sudah_selesai')}}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg">
         Sudah Selesai
-    </a> --}}
+    </a>
 </div>
 <div class="mt-5 col-span-12 rounded-sm border border-stroke bg-white py-6 shadow-default dark:border-strokedark dark:bg-boxdark xl:col-span-4">
     <div class="container mx-auto">
@@ -44,25 +29,44 @@
             <thead>
                 <tr>
                     <th>Customer</th>
-                    <th>Total Price</th>
+                    <th>Treatment</th>
+                    <th>Date</th>
+                    <th>Time</th>
                     <th>Status</th>
                     <th>Action</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($transactions as $transaction)
+                @foreach ($appointments as $appointment)
                 <tr>
-                    <td>{{$transaction->user->name}}</td>
-                    <td>{{format_rupiah($transaction->total_price)}}</td>
+                    <td>{{$appointment->user->name}}</td>
+                    <td>{{$appointment->detail->count()}} Treatment</td>
+                    <td>{{$appointment->appointment_date}}</td>
+                    <td>{{$appointment->appointment_time}}</td>
                     <td>
-                        <div class="font-bold px-2 py-1 rounded-lg text-center {{getStatusClass($transaction->status)}}">
-                            {{$transaction->status}}
+                        <div class="font-bold px-2 py-1 rounded-lg text-center {{getStatusClass($appointment->status)}}">
+                            {{$appointment->status == null ? "-" : $appointment->status}}
                         </div>
                     </td>
                     <td>
-                        <a href="{{ route('admin.transaction.invoice', $transaction->id) }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg text-sm">
-                            Cetak
-                        </a>
+                        <div class="flex gap-3">
+                            {{-- <a href="{{route('admin.account.edit', $appointment->id)}}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg">
+                                Edit
+                            </a> --}}
+                            {{-- <a href="{{ route('admin.account.destroy', $appointment->id) }}" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg" data-confirm-delete="true">
+                                Delete
+                            </a> --}}
+                            @if ($appointment->status == null || $appointment->status == '')
+                                <a href="{{ route('admin.complete.appointment', $appointment->id) }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg text-sm" data-confirm-finish="true">
+                                    Selesaikan Appointment
+                                </a>
+
+                            @else
+                            <a href="{{ route('admin.transaction.payment', $appointment->id) }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg">
+                                Bayar
+                            </a>
+                            @endif
+                        </div>
                     </td>
                 </tr>
                 @endforeach
@@ -70,7 +74,9 @@
             <tfoot>
                 <tr>
                     <th>Customer</th>
-                    <th>Total Price</th>
+                    <th>Treatment</th>
+                    <th>Date</th>
+                    <th>Time</th>
                     <th>Status</th>
                     <th>Action</th>
                 </tr>
@@ -84,7 +90,7 @@
     <script>
         let table = new DataTable('#transactionTable');
     </script>
-    {{-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     <script>
         document.addEventListener('click', function(event) {
             if (event.target.matches('[data-confirm-finish]')) {
@@ -96,5 +102,5 @@
                 });
             }
         });
-    </script> --}}
+    </script>
 @endpush

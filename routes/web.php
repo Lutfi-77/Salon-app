@@ -97,7 +97,13 @@ Route::middleware('role:admin')->prefix('admin')->group(function () {
     Route::post('treatment/edit/{id}', [AdminTreatmentController::class, 'update'])->name('admin.treatment.update');
     Route::delete('treatment/delete/{id}', [AdminTreatmentController::class, 'destroy'])->name('admin.treatment.destroy');
 
-    Route::get('transaction', [AdminTransactionController::class, 'index'])->name('admin.transaction.index');
+    Route::get('appointment/{filter?}', [AdminTransactionController::class, 'index'])->name('admin.appointment.index');
+    Route::get('appointment/complete/{id}', [AdminTransactionController::class, 'completeAppointment'])->name('admin.complete.appointment');
+    
+    Route::get('transaction', [AdminTransactionController::class, 'indexTransaction'])->name('admin.transaction.index');
+    Route::get('transaction/payment/{id}', [AdminTransactionController::class, 'paymentView'])->name('admin.transaction.payment');
+    Route::post('transaction/payment/{id}', [AdminTransactionController::class, 'store'])->name('admin.transaction.store');
+    Route::get('transaction/invoice/{id}', [AdminTransactionController::class, 'invoice'])->name('admin.transaction.invoice');
 });
 
 
