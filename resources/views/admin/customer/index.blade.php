@@ -3,9 +3,6 @@
 @section('title', 'Admin Account Customer Management')
 
 @section('content')
-<a href="{{route('admin.account.create')}}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg">
-    Tambah Akun
-</a>
 <div class="mt-5 col-span-12 rounded-sm border border-stroke bg-white py-6 shadow-default dark:border-strokedark dark:bg-boxdark xl:col-span-4">
     <div class="container mx-auto">
         <table id="customerTable" class="display" style="width:100%">

@@ -1,6 +1,6 @@
 @extends('admin.template.app')
 
-@section('title', 'Admin Account Edit')
+@section('title', 'Admin Customer Edit')
 
 @section('content')
 <form action="{{route('admin.customer.update', $customer->id)}}" method="POST" enctype="multipart/form-data">
