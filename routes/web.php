@@ -99,6 +99,8 @@ Route::middleware('role:admin')->prefix('admin')->group(function () {
 
     Route::get('appointment/{filter?}', [AdminTransactionController::class, 'index'])->name('admin.appointment.index');
     Route::get('appointment/complete/{id}', [AdminTransactionController::class, 'completeAppointment'])->name('admin.complete.appointment');
+    Route::get('appointment/detail/{id}', [AdminTransactionController::class, 'show'])->name('admin.appointment.detail');
+    Route::get('appointment/status/{id}/change/{status}', [AdminTransactionController::class, 'changeStatus'])->name('admin.appointment.changeStatus');
     
     Route::get('transaction', [AdminTransactionController::class, 'indexTransaction'])->name('admin.transaction.index');
     Route::get('transaction/payment/{id}', [AdminTransactionController::class, 'paymentView'])->name('admin.transaction.payment');

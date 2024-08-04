@@ -75,7 +75,7 @@
                         <h5 class="font-bold mb-3" id="total_price">Rp. 0</h5>
                     </div>
                     <div class="input-group grid grid-cols-2" id="inputGroup"></div>
-                    <button class="w-full bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg">Bayar</button>
+                    <button class="w-full bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg">Book Now</button>
                 </form>
             </div>
         </div>
@@ -260,7 +260,7 @@
                 // create input
                 let treatment_id = document.createElement("input");
                 let worker_id = document.createElement("input");
-                treatment_id.setAttribute('type', 'text');
+                treatment_id.setAttribute('type', 'hidden');
                 // treatment_id.setAttribute('name', `appointment[${inputIndex}]`);
                 treatment_id.setAttribute('name', `appointment[${inputIndex}]`);
                 treatment_id.setAttribute("value", JSON.stringify({"treatmentId" : value.treatmentId, "workerId" : value.workerId}));

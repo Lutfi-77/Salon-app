@@ -57,15 +57,17 @@
                                 Delete
                             </a> --}}
                             @if ($appointment->status == null || $appointment->status == '')
-                                <a href="{{ route('admin.complete.appointment', $appointment->id) }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg text-sm" data-confirm-finish="true">
+                                <a href="{{ route('admin.complete.appointment', $appointment->id) }}" class="bg-blue-500 text-center hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg text-sm" data-confirm-finish="true">
                                     Selesaikan Appointment
                                 </a>
-
                             @else
                             <a href="{{ route('admin.transaction.payment', $appointment->id) }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg">
                                 Bayar
                             </a>
                             @endif
+                            <a href="{{ route('admin.appointment.detail', $appointment->id) }}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg text-sm">
+                                Detail
+                            </a>
                         </div>
                     </td>
                 </tr>

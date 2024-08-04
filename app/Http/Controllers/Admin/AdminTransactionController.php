@@ -7,20 +7,29 @@ use App\Models\Appointment;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Alert;
+use App\Models\DetailAppointment;
 
 class AdminTransactionController extends Controller
 {
 
     public function checkStatus()
     {
-        $appointmentsWithAcceptedDetails = Appointment::whereDoesntHave('detail', function ($query) {
-            // $query->count();
-            $query->where('status_worker', '<>', 'selesai');
-            // $query->count();
+        // $appointmentsToUpdate = Appointment::whereHas('detail', function ($query) {
+        //     $query->where('status_worker', 'selesai');
+        // })->whereDoesntHave('detail', function ($query) {
+        //     $query->where('status_worker', 'menunggu');
+        // })->get();
+        // // dd($appointmentsToUpdate);
+        // foreach ($appointmentsToUpdate as $appointment) {
+        //     $appointment->update(['status' => 'selesai']);
+        // }
+        $appointmentsToUpdate = Appointment::whereDoesntHave('detail', function ($query) {
+            $query->whereNotIn('status_worker', ['selesai', 'batal']);
         })->get();
-        // dd($appointmentsWithAcceptedDetails);
-        foreach ($appointmentsWithAcceptedDetails as $detail) {
-            $detail->update(['status' => 'selesai']);
+        
+        // Update status appointment to selesai when all status_worker equal to selesai or selesai and batal
+        foreach ($appointmentsToUpdate as $appointment) {
+            $appointment->update(['status' => 'selesai']);
         }
     }
 
@@ -53,13 +62,31 @@ class AdminTransactionController extends Controller
             Alert::toast('Terjadi kesalahan', 'error');
             return redirect()->route('admin.transaction.index');
         }
-        $appointment->detail()->update(['status_worker' => "selesai"]);
+        // $appointment->detail()->update(['status_worker' => "selesai"]);
+        $cek = $appointment->detail()->whereIn('status_worker', ['menunggu'])->get();
+        // dd(!$cek->isEmpty());
+        if (!$cek->isEmpty()) {
+            Alert::toast('Masih ada appointment yang memiliki status Menunggu', 'error');
+            return redirect()->back();
+        }
+
+        $changeStatus = $appointment->detail()
+        ->whereIn('status_worker', ['diterima', 'selesai'])
+        ->where('status_worker', '!=', 'batal')
+        ->update(['status_worker' => 'selesai']);
+
+        $appointment->status = 'selesai';
+        $appointment->save();
+
         Alert::toast('Data berhasil tersimpan', 'success');
-        return redirect()->route('admin.transaction.index');
+        return redirect()->route('admin.appointment.index');
     }
 
     public function paymentView($id){
-        $appointment = Appointment::find($id);
+        $appointment = Appointment::with(['detail' => function ($query) {
+            $query->where('status_worker', 'selesai');
+        }])->where('id', $id)->first();
+        // dd($appointment->detail);
         return view('admin.transaction.payment', compact('appointment'));
     }
 
@@ -87,6 +114,7 @@ class AdminTransactionController extends Controller
         $transaction->total_price = $request->total_price;
         $transaction->status = 'sudah terbayar';
         $transaction->save();
+
         Alert::toast('Data berhasil tersimpan', 'success');
         return redirect()->route('admin.transaction.invoice', $transaction->id);
     }
@@ -96,7 +124,21 @@ class AdminTransactionController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $detailAppointments = DetailAppointment::where('appointment_id', $id)->get();
+        return view('admin.transaction.detail', compact('detailAppointments'));
+    }
+
+    public function changeStatus($id, $status)
+    {
+        $detailAppointment = DetailAppointment::find($id);
+        if(!$detailAppointment){
+            Alert::toast('Terjadi kesalahan', 'error');
+            return redirect()->route('admin.transaction.index');
+        }
+        $detailAppointment->status_worker = $status;
+        $detailAppointment->save();
+        Alert::toast('Data berhasil tersimpan', 'success');
+        return redirect()->route('admin.appointment.index');
     }
 
     /**
