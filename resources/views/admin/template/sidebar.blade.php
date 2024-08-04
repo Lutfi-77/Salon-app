@@ -172,6 +172,14 @@
                 <li>
                   <a
                     class="group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white"
+                    href="{{route('admin.customer.index')}}"
+                    :class="page === 'worker' && '!text-white'"
+                    >Customer</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white"
                     href="{{route('admin.manage.index')}}"
                     :class="page === 'admin' && '!text-white'"
                     >Admin</a

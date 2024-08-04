@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AdminAccountController;
 use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Admin\AdminCatalogueController;
 use App\Http\Controllers\Admin\AdminCategoryController;
+use App\Http\Controllers\Admin\AdminCustomerAccountController;
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\AdminGalleryController;
 use App\Http\Controllers\Admin\AdminManageController;
@@ -106,6 +107,10 @@ Route::middleware('role:admin')->prefix('admin')->group(function () {
     Route::get('transaction/payment/{id}', [AdminTransactionController::class, 'paymentView'])->name('admin.transaction.payment');
     Route::post('transaction/payment/{id}', [AdminTransactionController::class, 'store'])->name('admin.transaction.store');
     Route::get('transaction/invoice/{id}', [AdminTransactionController::class, 'invoice'])->name('admin.transaction.invoice');
+
+    Route::get('customer', [AdminCustomerAccountController::class, 'index'])->name('admin.customer.index');
+    Route::get('customer/edit/{id}', [AdminCustomerAccountController::class, 'edit'])->name('admin.customer.edit');
+    Route::post('customer/edit/{id}', [AdminCustomerAccountController::class, 'update'])->name('admin.customer.update');
 });
 
 

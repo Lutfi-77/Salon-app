@@ -124,7 +124,7 @@
           </span>
 
           <span class="h-12 w-12 rounded-full">
-            <img src="{{asset('assets/img/dashboard/images/user/user-01.png')}}" alt="User" />
+            <img src="{{Auth::user()->customer->image == null || Auth::user()->customer->image == "" ? asset('assets/img/dashboard/images/logo/logo-icon.svg') : asset('storage/'.Auth::user()->customer->image)}}" alt="User" />
           </span>
 
           <svg
