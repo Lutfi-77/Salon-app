@@ -30,18 +30,22 @@
                         Jl. Wolter Monginsidi No.81 Kebayoran Baru, Jakarta Selatan.
                     </div>
                     <div class="flex flex-row items-center gap-3">
+                        <i class="fa-solid fa-phone"></i>
+                        021-7395108
+                    </div>
+                    <div class="flex flex-row items-center gap-3">
                         <i class="fa-brands fa-facebook-f"></i>
-                        Charisma.salon
+                        charismasalon81
                     </div>
                     <div class="flex flex-row items-center gap-3">
                         <i class="fa-brands fa-instagram"></i>
-                        Charisma.salon
+                        charisma.salonspa
                     </div>
                 </div>
 
                 <div class="about-us">
                     <h5 class="text-2xl mb-2">Tentang kami</h5>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic, illo fuga. Voluptatem possimus necessitatibus distinctio aperiam nostrum dolorum optio earum, laboriosam, deserunt rem rerum mollitia iusto reiciendis voluptas. Alias, beatae.
+                    Charisma salon merupakan salon kecantikan yang berada di Kebayoran baru, Jakarta. Charisma salon menawarkan berbagai macam perawatan rambut, mulai dari pangkas rambut, mewarnai rambut, smoothing, dan SPA.
                 </div>
             </div>
         </div>

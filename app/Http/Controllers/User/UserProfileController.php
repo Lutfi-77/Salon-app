@@ -60,7 +60,7 @@ class UserProfileController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required',
-            'email' => 'required|unique:users,email',
+            // 'email' => 'required|unique:users,email',
             'password' => 'confirmed',
             'phone' => 'required',
             'address' => 'required',

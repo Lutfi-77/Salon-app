@@ -19,7 +19,7 @@
         <div
             class="absolute text-white top-1/2 left-1/2 md:left-auto md:-translate-x-0 -translate-y-1/2 -translate-x-1/2 text-center md:text-left">
             <h1 class="text-4xl w-60 md:text-7xl md:w-[600px] mx-auto md:mx-0 mb-3">Get Treatment You Deserve</h1>
-            <button class="text-white px-3 py-2 rounded-md bg-[#9F2B2B] mb-3">Book Appointment</button>
+            <a href="{{route('user.login')}}" class="block w-max text-white px-3 py-2 rounded-md bg-[#9F2B2B] mb-3">Book Appointment</a>
             <p class="w-72">
                 Our professional team will give you the best treatment you want, with best product and relaxing
                 environment.
