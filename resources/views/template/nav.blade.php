@@ -6,7 +6,7 @@
     ]
 @endphp
 
-<nav id="navbar" class="w-full bg-darkTransparent fixed top-0 w-full shadow-md z-10">
+<nav id="navbar" class="w-full bg-darkTransparent fixed top-0 shadow-md z-10">
     <div class="container mx-auto">
         <div class="flex justify-between text-white items-center">
             <div class="py-5">
