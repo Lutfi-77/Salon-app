@@ -1,7 +1,7 @@
 @php
     $groupLink = [
         ['url' => route('user.dashboard'), 'title' => 'Dashboard'],
-        ['url' => route('user.appointment'), 'title' => 'Make Appointment'],
+        // ['url' => route('user.appointment'), 'title' => 'Make Appointment'],
     ]
 @endphp
 
