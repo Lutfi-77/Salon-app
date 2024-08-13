@@ -154,7 +154,7 @@
             class="flex flex-col gap-5 border-b border-stroke px-6 py-7.5 dark:border-strokedark"
           >
             <li>
-              <a
+              {{-- <a
                 href="{{route('profile.index')}}"
                 class="flex items-center gap-3.5 text-sm font-medium duration-300 ease-in-out hover:text-primary lg:text-base"
               >
@@ -176,7 +176,7 @@
                   />
                 </svg>
                 My Profile
-              </a>
+              </a> --}}
             </li>
           </ul>
           <form action="{{route('worker.logout')}}" method="POST">
