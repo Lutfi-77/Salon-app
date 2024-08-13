@@ -32,10 +32,10 @@ Route::get('/register', [AuthUserController::class, 'register'])->name('user.reg
 Route::post('/register', [AuthUserController::class, 'storeRegister'])->name('user.registerStore');
 
 // USER ROUTES
+Route::resource('profile', UserProfileController::class);
 Route::middleware(['role:customer', 'profileCheck'])->prefix('user')->group(function () {
     Route::get('dashboard', [UserDashboardController::class, 'index'])->name('user.dashboard');
     Route::post('logout', [AuthUserController::class, 'logout'])->name('user.logout');
-    Route::resource('profile', UserProfileController::class);
     // Route::post('logout', [AuthUserController::class, 'logout'])->name('user.logout');
 
     Route::get('appointment', [AppointmentController::class, 'index'])->name('user.appointment');
