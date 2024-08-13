@@ -104,7 +104,7 @@ class AdminAccountController extends Controller
         $user = User::find($id);
         $validated = $request->validate([
             'name' => 'required',
-            'email' => 'required|unique:users,email',
+            'email' => 'required',
             'password' => 'confirmed',
             'phone' => 'required',
             'address' => 'required',
