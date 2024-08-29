@@ -46,6 +46,8 @@ Route::middleware(['role:customer', 'profileCheck'])->prefix('user')->group(func
     
     Route::get('appointment/detail/{id}', [AppointmentController::class, 'detail'])->name('user.appointment.detail');
     Route::get('appointment/cancel/{id}', [AppointmentController::class, 'cancel'])->name('user.appointment.cancel');
+
+    Route::get('appointment/available-times/{date}', [AppointmentController::class, 'getAvailableTimes'])->name('availableTimes');
 });
     
     

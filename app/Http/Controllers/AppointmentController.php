@@ -159,4 +159,18 @@ class AppointmentController extends Controller
         return response()->json(['error' => 'Worker not found'], 404);
     }
 
+    public function getAvailableTimes($date)
+    {
+        // Retrieve all appointments for the given date
+        $appointments = Appointment::whereDate('appointment_date', $date)->pluck('appointment_time');
+
+        // Define all possible time slots
+        $allTimes = ["09:00", "11:00", "13:00", "15:00", "17:00", "19:00", "21:00"];
+
+        // Filter out times that are already booked
+        $availableTimes = array_values(array_diff($allTimes, $appointments->toArray()));
+
+        return response()->json($availableTimes);
+    }
+
 }

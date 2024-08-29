@@ -1,6 +1,6 @@
-@php
+{{-- @php
     $times = ["09:00", "11:00", "13:00", "15:00", "17:00", "19:00", "21:00"];
-@endphp
+@endphp --}}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -55,9 +55,7 @@
                             <input type="date" min="{{date("Y-m-d")}}" name="date" class="border-2 border-gray-200 rounded-xl w-full py-2 px-4 text-gray-700 focus:outline-none focus:bg-white focus:border-primary mb-5">
                         </div>
                         <div class="form-group">
-                            <label class="mb-2 block">Time</label>
-                            {{-- <input type="time" id="appointment_time" name="time" min="07:00" max="21:00" class="border-2 border-gray-200 rounded-xl w-full py-2 px-4 text-gray-700 focus:outline-none focus:bg-white focus:border-primary">
-                            <small class="text-red-500">*Jam kerja dimulai jam 07:00 sampai 21:00</small> --}}
+                            {{-- <label class="mb-2 block">Time</label>
                             <div class="grid md:grid-cols-4 grid-cols-2 gap-2">
                                 @foreach ($times as $key => $time)
                                 <div class="time-group">
@@ -67,8 +65,15 @@
                                     </label>
                                 </div>
                                 @endforeach
+                            </div> --}}
+                            <div class="time-group">
+                                <label class="mb-2 block">Time</label>
+                                <div class="grid md:grid-cols-4 grid-cols-2 gap-2" id="time-grid">
+                                    <!-- Time slots will be dynamically added here -->
+                                </div>
                             </div>
                         </div>
+                        
                     </div>
                     <div class="text-group mt-5 flex justify-between flex-col md:flex-row mb-5 text-2xl">
                         <h4 class="mb-3">Total:</h4>
@@ -280,6 +285,37 @@
             addToTable(treatmentList);
         }
 
+        async function updateAvailableTimes() {
+            const dateInput = document.querySelector('input[name="date"]');
+            const timeContainer = document.querySelector('#time-grid');
+            
+            if (dateInput.value) {
+                const date = dateInput.value;
+                const response = await fetch(`{{ url('user/appointment/available-times') }}/${date}`);
+                const availableTimes = await response.json();
+
+                console.log(availableTimes)
+                timeContainer.innerHTML = '';
+
+                availableTimes.forEach((time, index) => {
+                    let timeId = `time-${index}`;
+                    
+                    let timeHtml = `
+                        <div class="time-group">
+                            <input type="radio" id="${timeId}" name="time" value="${time}" class="hidden peer" required />
+                            <label for="${timeId}" class="inline-flex items-center justify-center w-full py-3 px-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer peer-checked:border-blue-600 peer-checked:bg-blue-600 peer-checked:text-white hover:text-gray-600 hover:bg-gray-100">                           
+                                ${time}
+                            </label>
+                        </div>
+                    `;
+
+                    timeContainer.innerHTML += timeHtml;
+                });
+            }
+        }
+
+        document.querySelector('input[name="date"]').addEventListener('change', updateAvailableTimes);
+
         // function setCurrentTime() {
         //     const now = new Date();
         //     const hours = String(now.getHours()).padStart(2, '0');
@@ -295,3 +331,5 @@
     </script>
 </body>
 </html>
+
+{{-- how to remove the time when already selected by other user in that date --}}

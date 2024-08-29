@@ -46,15 +46,15 @@
                             <input type="date" min="{{date("Y-m-d")}}" value="{{$appointment->date}}" name="date" class="border-2 border-gray-200 rounded-xl w-full py-2 px-4 text-gray-700 focus:outline-none focus:bg-white focus:border-primary mb-5">
                         </div>
                         <div class="form-group">
-                            <label class="mb-2 block">Time</label>
-                            @foreach ($times as $key => $time)
-                                <div class="time-group py-2">
-                                    <input type="radio" id="time-{{$key}}" name="time" value="{{$time}}" class="hidden peer" required />
-                                    <label for="time-{{$key}}" class="inline-flex items-center justify-center w-full py-3 px-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer peer-checked:border-blue-600 peer-checked:bg-blue-600 peer-checked:text-white hover:text-gray-600 hover:bg-gray-100">                           
-                                        {{$time}}
-                                    </label>
+                            {{-- <label class="mb-2 block">Time</label> --}}
+                            {{-- <div class="grid md:grid-cols-4 grid-cols-2 gap-2"> --}}
+                                <div class="time-group">
+                                    <label class="mb-2 block">Time</label>
+                                    <div class="grid md:grid-cols-4 grid-cols-2 gap-2" id="time-grid">
+                                        <!-- Time slots will be dynamically added here -->
+                                    </div>
                                 </div>
-                            @endforeach
+                            {{-- </div> --}}
                         </div>
                     </div>
                     <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg">
@@ -104,6 +104,37 @@
             }
             return 'Rp. ' + x1 + x2;
         }
+
+        async function updateAvailableTimes() {
+            const dateInput = document.querySelector('input[name="date"]');
+            const timeContainer = document.querySelector('#time-grid');
+            
+            if (dateInput.value) {
+                const date = dateInput.value;
+                const response = await fetch(`{{ url('user/appointment/available-times') }}/${date}`);
+                const availableTimes = await response.json();
+
+                console.log(availableTimes)
+                timeContainer.innerHTML = '';
+
+                availableTimes.forEach((time, index) => {
+                    let timeId = `time-${index}`;
+                    
+                    let timeHtml = `
+                        <div class="time-group">
+                            <input type="radio" id="${timeId}" name="time" value="${time}" class="hidden peer" required />
+                            <label for="${timeId}" class="inline-flex items-center justify-center w-full py-3 px-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer peer-checked:border-blue-600 peer-checked:bg-blue-600 peer-checked:text-white hover:text-gray-600 hover:bg-gray-100">                           
+                                ${time}
+                            </label>
+                        </div>
+                    `;
+
+                    timeContainer.innerHTML += timeHtml;
+                });
+            }
+        }
+
+        document.querySelector('input[name="date"]').addEventListener('change', updateAvailableTimes);
 
     </script>
 </body>
